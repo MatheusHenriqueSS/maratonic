@@ -4,7 +4,7 @@ Web app for competitive programming academic entity (Maratonic) - MC 426 Project
 
 ## Brief description
 
-We are Computer Science students at UNICAMP who are involved with an entity in our university called Maratonic. Our goal with this project is to create a web app to help us to encorage and to teach other students about competitive programming. 
+We are all Computer Science students at UNICAMP who are involved with an entity in our university called Maratonic. Our goal with this project is to create a web app to help us to encorage and to teach other students about competitive programming. 
 
 Our application main features include:
 
