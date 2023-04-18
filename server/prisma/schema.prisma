@@ -53,12 +53,18 @@ model Profile {
   userId        String         @unique @db.ObjectId
 }
 
+model Image {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String   @unique
+  bytes     Bytes
+  createdAt DateTime @default(now())
+}
+
 type ProblemsStatus {
   solved Int @default(0)
   tried  Int @default(0)
 }
 
-// Address is an embedded document
 enum UserRole {
   TEACHER
   STUDENT
