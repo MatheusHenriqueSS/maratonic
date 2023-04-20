@@ -21,12 +21,14 @@ model Post {
 }
 
 model User {
-  id       String   @id @default(auto()) @map("_id") @db.ObjectId
-  email    String   @unique
-  nickname String
-  role     UserRole @default(STUDENT)
-  profile  Profile?
-  posts    Post[]
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  email        String   @unique
+  passwordHash String
+  salt         String // Password salt
+  nickname     String
+  role         UserRole @default(STUDENT)
+  profile      Profile?
+  posts        Post[]
 }
 
 model Category {
