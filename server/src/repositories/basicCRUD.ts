@@ -4,7 +4,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 // Function that inserts data into a table
-const insertData = async (tableName: string, data: any) => {
+const insertData = async (tableName: string, data: object) => {
   try {
     const newData = await prisma[tableName].create({ data });
     console.log(`Data inserted into ${tableName}: ${JSON.stringify(newData)}`);
@@ -14,7 +14,7 @@ const insertData = async (tableName: string, data: any) => {
 };
 
 // Function that retrieves data from a table
-const retrieveData = async (tableName: string, filter: any) => {
+const retrieveData = async (tableName: string, filter: object) => {
   try {
     const data = await prisma[tableName].findMany({ where: filter });
     console.log(
@@ -28,7 +28,7 @@ const retrieveData = async (tableName: string, filter: any) => {
 };
 
 // Function that updates data in a table
-const updateData = async (tableName: string, id: number, newData: any) => {
+const updateData = async (tableName: string, id: number, newData: object) => {
   try {
     const updatedData = await prisma[tableName].update({
       where: { id },
