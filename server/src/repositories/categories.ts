@@ -2,17 +2,15 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-interface CategoryData {
-    name: string;
-}
-
 interface CategoryUpdateData {
     name?: string;
 }
 
-async function create(data: CategoryData) {
+async function create(name: string) {
     const category = await prisma.category.create({
-        data,
+        data: {
+            name,
+        },
     });
     return category;
 }
