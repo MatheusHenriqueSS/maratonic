@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-interface ProblemUpdateData {
+export interface ProblemUpdateData {
     link?: string;
 }
 

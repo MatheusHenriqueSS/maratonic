@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-interface ImageUpdateData {
+export interface ImageUpdateData {
     name?: string;
     bytes?: Buffer;
 }

@@ -3,7 +3,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-interface PostUpdateData {
+export interface PostUpdateData {
     authorName?: string;
     title?: string;
     content?: string;

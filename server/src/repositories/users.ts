@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-interface UserUpdateData {
+export interface UserUpdateData {
     nickname?: string;
     email?: string;
     passwordHash?: string;
