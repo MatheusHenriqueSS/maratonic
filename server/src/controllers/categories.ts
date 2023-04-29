@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import categoriesRepository from "../repositories/categories";
+import categoriesRepository, { CategoryUpdateData } from "../repositories/categories";
 
 const create = async (req: Request, res: Response): Promise<void> => {
     try {
@@ -36,8 +36,8 @@ const deletebyId = async (req: Request, res: Response): Promise<void> => {
 const updateById = async (req: Request, res: Response): Promise<void> => {
     try {
         const { id } = req.params;
-        const { name } = req.body;
-        const category = await categoriesRepository.updateById(id, name);
+        const categoryUpdate: CategoryUpdateData = req.body;
+        const category = await categoriesRepository.updateById(id, categoryUpdate);
         res.status(200).json(category);
     } catch (error) {
         console.error(error);
