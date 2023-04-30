@@ -19,13 +19,13 @@ jobs:
                   cache: "npm"
 
             - name: Install dependencies
-              run: npm install
+              run: cd server && npm install
 
             - name: Build
-              run: npm run build
+              run: cd server && npm run build
 
             - name: Lint
-              run: npm run lint
+              run: cd server && npm run lint
 
             - name: Test
-              run: npm test
+              run: cd server && npm run test
