@@ -14,19 +14,19 @@ model Post {
   title         String
   content       String
   type          PostType   @default(POST)
-  author        User       @relation(fields: [authorId], references: [id])
-  authorId      String     @db.ObjectId
+  authorName    String     
   categories    Category[] @relation(fields: [categoriesIDs], references: [id])
   categoriesIDs String[]   @db.ObjectId
 }
 
 model User {
-  id       String   @id @default(auto()) @map("_id") @db.ObjectId
-  email    String   @unique
-  nickname String
-  role     UserRole @default(STUDENT)
-  profile  Profile?
-  posts    Post[]
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  email        String   @unique
+  passwordHash String
+  salt         String // Password salt
+  nickname     String   @unique
+  role         UserRole @default(STUDENT)
+
 }
 
 model Category {
@@ -45,13 +45,13 @@ model Problem {
   categoriesIDs String[]   @db.ObjectId
 }
 
-model Profile {
-  id            String         @id @default(auto()) @map("_id") @db.ObjectId
-  bio           String?
-  problemStatus ProblemsStatus
-  user          User           @relation(fields: [userId], references: [id])
-  userId        String         @unique @db.ObjectId
-}
+//model Profile {
+//  id            String         @id @default(auto()) @map("_id") @db.ObjectId
+//  bio           String?
+//  problemStatus ProblemsStatus
+//  user          User           @relation(fields: [userId], references: [id])
+//  userId        String         @unique @db.ObjectId
+//}
 
 model Image {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
