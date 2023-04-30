@@ -1,7 +1,7 @@
 import prismaMock from "../../singleton";
 import categoriesRepositories, { CategoryUpdateData } from "../categories";
 
-test("should create new user ", async () => {
+test("should create new category ", async () => {
     const newCategory = {
         id: "212313212",
         name: "graph",
