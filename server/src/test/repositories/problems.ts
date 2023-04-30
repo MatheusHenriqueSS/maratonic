@@ -1,7 +1,5 @@
 import prisma from "../singleton";
 
-const prisma = new PrismaClient();
-
 export interface ProblemUpdateData {
     link?: string;
 }
