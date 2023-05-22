@@ -1,5 +1,5 @@
 import prismaMock from "../../singleton";
-import postsRepositories, { PostUpdateData } from "../posts";
+import postsRepositories, { PostUpdateData } from "../../repositories/posts";
 import { PostType } from "@prisma/client";
 
 test("should create new post ", async () => {

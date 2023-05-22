@@ -1,5 +1,5 @@
 import prismaMock from "../../singleton";
-import imagesRepositories, { ImageUpdateData } from "../images";
+import imagesRepositories, { ImageUpdateData } from "../../repositories/images";
 import { randomBytes } from 'crypto'
 
 test("should create new image ", async () => {

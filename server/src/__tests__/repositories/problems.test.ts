@@ -1,5 +1,5 @@
 import prismaMock from "../../singleton";
-import problemsRepositories, { ProblemUpdateData } from "../problems";
+import problemsRepositories, { ProblemUpdateData } from "../../repositories/problems";
 
 test("should create new problem ", async () => {
     const newProblem = {
