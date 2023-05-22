@@ -1,4 +1,4 @@
-import prisma from "../singleton"
+import prisma from "../client"
 
 export interface ImageUpdateData {
   name?: string;
