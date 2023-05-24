@@ -35,10 +35,10 @@ Here we present the documents we made during this process.
 
 ### Extra
 
-- [Participation report](requirements_documents/interviews/Relatorio_de_participacao.csv)
+- [Participation report](requirements_documents/interviews/relatorio_de_participacao.csv)
 
 ## Benchmark
 
 ### Document
 
-- [Here](rerequirements_documents/benchmarking/benchmarking.pdf) is our benchmarking document.
+- [Here](requirements_documents/benchmarking/benchmarking.pdf) is our benchmarking document.
