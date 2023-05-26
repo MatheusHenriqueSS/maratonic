@@ -36,9 +36,11 @@ Here we present the documents we made during this process.
 ### Extra
 
 - [Participation report](requirements_documents/interviews/relatorio_de_participacao.csv)
+- [Answers](requirements_documents/interviews/respostas.pdf)
 
 ## Benchmark
 
 ### Document
 
 - [Here](requirements_documents/benchmarking/benchmarking.pdf) is our benchmarking document.
+- [Here](https://www.figma.com/file/bxQSLCquvGY7Ee04qfwDPs/MaratonIC-FigJam?type=whiteboard&node-id=4%3A1015&t=C8FaSMNi0rOK8ivx-1) is our storyboard, made with Figma.
