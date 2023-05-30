@@ -1,5 +1,5 @@
 import prismaMock from "../../singleton";
-import categoriesRepositories, { CategoryUpdateData } from "../categories";
+import categoriesRepositories, { CategoryUpdateData } from "../../repositories/categories";
 
 test("should create new category ", async () => {
     const newCategory = {

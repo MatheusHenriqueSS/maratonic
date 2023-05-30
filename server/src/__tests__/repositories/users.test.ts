@@ -1,5 +1,5 @@
 import prismaMock from "../../singleton";
-import usersRepositories, { UserUpdateData } from "../users";
+import usersRepositories, { UserUpdateData } from "../../repositories/users";
 import { UserRole } from "@prisma/client";
 
 test("should create new user ", async () => {
