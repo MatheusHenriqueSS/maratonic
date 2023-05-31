@@ -1,4 +1,4 @@
-import prismaMock from "../../singleton";
+import prismaMock from "../../mock";
 import usersRepositories, { UserUpdateData } from "../../repositories/users";
 import { UserRole } from "@prisma/client";
 

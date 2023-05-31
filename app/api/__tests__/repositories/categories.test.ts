@@ -1,4 +1,4 @@
-import prismaMock from "../../singleton";
+import prismaMock from "../../mock";
 import categoriesRepositories, { CategoryUpdateData } from "../../repositories/categories";
 
 test("should create new category ", async () => {

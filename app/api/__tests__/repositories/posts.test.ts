@@ -1,4 +1,4 @@
-import prismaMock from "../../singleton";
+import prismaMock from "../../mock";
 import postsRepositories, { PostUpdateData } from "../../repositories/posts";
 import { PostType } from "@prisma/client";
 

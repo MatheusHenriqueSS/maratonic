@@ -1,4 +1,4 @@
-import prismaMock from "../../singleton";
+import prismaMock from "../../mock";
 import imagesRepositories, { ImageUpdateData } from "../../repositories/images";
 import { randomBytes } from 'crypto'
 

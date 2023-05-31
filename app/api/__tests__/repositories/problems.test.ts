@@ -1,4 +1,4 @@
-import prismaMock from "../../singleton";
+import prismaMock from "../../mock";
 import problemsRepositories, { ProblemUpdateData } from "../../repositories/problems";
 
 test("should create new problem ", async () => {
