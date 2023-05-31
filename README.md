@@ -4,29 +4,33 @@ Web app for competitive programming academic entity (Maratonic) - MC 426 Project
 
 ## Brief description
 
-We are all Computer Science students at UNICAMP who are involved with an entity in our university called Maratonic. Our goal with this project is to create a web app to help us to encorage and to teach other students about competitive programming. 
+We are all Computer Science students at UNICAMP who are involved with an entity in our university called Maratonic. Our goal with this project is to create a web app to help us to encorage and to teach other students about competitive programming.
 
 Our application main features include:
 
-* Being able to search for exercises inside and outside the site.
-* Read lessons and discuss about them and other topics in blogs with other students and teachers.
-* Two factor authentication with UNICAMP login.
-* Dashboard with each students' data to help them see how much they improved.
+- Being able to search for exercises inside and outside the site.
+- Read lessons and discuss about them and other topics in blogs with other students and teachers.
+- Two factor authentication with UNICAMP login.
+- Dashboard with each students' data to help them see how much they improved.
 
 ## Contributors
 
-Daniel Yuji Hosomi - RA: 248255  
-Gabriel Ribeiro Paiva - RA: 223475  
-Lucas Francisco Silva Paiva - RA: 248390  
-Matheus Henrique de Sousa Silva - RA: 239995  
-Vinícius Alves Damasceno - RA: 235121
+- Daniel Yuji Hosomi - RA: 248255
+- Gabriel Ribeiro Paiva - RA: 223475
+- Lucas Francisco Silva Paiva - RA: 248390
+- Matheus Henrique de Sousa Silva - RA: 239995
+- Vinícius Alves Damasceno - RA: 235121
 
-## Estilo de Arquitetura Adotado
+## Arquitetura
+
+### Estilo de Arquitetura Adotado
+
 O estilo de arquitetura adotado neste projeto é o server-client, em que o servidor _(backend)_ é responsável por processar as requisições do cliente _(frontend)_ e fornecer os dados necessários. O cliente _(frontend)_ é implementado em uma tecnologia como React, que consome a API do servidor e exibe as informações ao usuário.
 
 O servidor segue o padrão **REST** (Representational State Transfer) para a definição das rotas e comunicação com o cliente. O REST é um estilo arquitetural que utiliza os métodos HTTP (GET, POST, PUT, DELETE) para interações entre cliente e servidor. Cada rota do servidor representa um recurso específico e pode ser acessada pelo cliente para realizar operações CRUD (Create, Read, Update, Delete) nos dados.
 
-## Principais Componentes e Responsabilidades
+### Principais Componentes e Responsabilidades
+
 No projeto, os principais componentes e suas responsabilidades são os seguintes:
 
 - Controllers: Os controllers são responsáveis por receber as requisições do cliente e direcionar a lógica adequada para manipular os dados correspondentes. Eles atuam como intermediários entre as rotas do servidor e os serviços de negócio. Os controllers podem realizar validações, autenticações e chamadas aos serviços necessários para atender às solicitações do cliente.
@@ -47,4 +51,8 @@ Cada componente do projeto desempenha um papel fundamental na aplicação:
 - As pages representam as diferentes telas ou rotas do cliente, responsáveis por renderizar o conteúdo e interagir com os dados.
 - Os components são elementos modulares e reutilizáveis que compõem as páginas e ajudam na construção da interface do usuário.
 
+### Singleton como padrão de projeto no Repositories
 
+Para garantir que haja sempre uma única instância do cliente do banco de dados (Prisma), o padrão _singleton_ foi usado. Há também um _singleton_ nos testes, que faz um _mock_ do singleton do repositories para testar as funções implementadas.
+
+O _singleton_ usado nas funções do Repositories é exportado pelo arquivo _client.ts_ e o usado nos testes é exportado pelo arquivo _mock.ts_
