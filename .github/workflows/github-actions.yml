@@ -1,4 +1,4 @@
-name: Build, Lint, and Test on backend
+name: Build, Lint, and Test
 
 on:
     pull_request:
@@ -17,19 +17,19 @@ jobs:
               with:
                   node-version: "16.x"
                   cache: "npm"
-                  cache-dependency-path: server/package-lock.json
+                  cache-dependency-path: package-lock.json
 
             - name: Install dependencies
-              run: cd server && npm install
+              run: npm install
 
             - name: Gererate Prisma Client
-              run: cd server && npm run generate
+              run: npm run generate
 
             - name: Build
-              run: cd server && npm run build
+              run: npm run build
 
             - name: Lint
-              run: cd server && npm run lint
+              run: npm run lint
 
             - name: Test
               run: cd server && npm run test
