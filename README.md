@@ -23,6 +23,10 @@ Our application main features include:
 
 ## Arquitetura
 
+### Diagrama
+
+- [Aqui](architecture_diagram/diagram.pdf) está o diagrama da arquitetura.
+
 ### Estilo de Arquitetura Adotado
 
 O estilo de arquitetura adotado neste projeto é o server-client, em que o servidor _(backend)_ é responsável por processar as requisições do cliente _(frontend)_ e fornecer os dados necessários. O cliente _(frontend)_ é implementado em uma tecnologia como React, que consome a API do servidor e exibe as informações ao usuário.
