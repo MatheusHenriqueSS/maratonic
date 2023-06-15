@@ -9,7 +9,6 @@
   background-color: #658BC3;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
 }
 
 .logo_container {
@@ -24,7 +23,6 @@
 
 .links_container {
   display: flex;
-  justify-content: flex-start;
 }
 
 .link {
