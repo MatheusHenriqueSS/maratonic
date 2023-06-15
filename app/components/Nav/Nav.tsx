@@ -1,18 +1,17 @@
-import Link from 'next/link'
 import Image from "next/image";
 import React from "react";
 import { route_links, login_links, logged_links } from "./links";
 import logo from "./icons/MaratonIC_grande.png";
 import styles from "./Nav.module.css";
 
-type LinkRoute = {
+type Link = {
   label: string;
   href: string;
   icon: string;
   is_profile?: boolean;
 };
 
-const NavLinks: React.FC<{ links: LinkRoute[]; position?: string }> = ({
+const NavLinks: React.FC<{ links: Link[]; position?: string }> = ({
   links,
   position,
 }) => {
@@ -23,10 +22,10 @@ const NavLinks: React.FC<{ links: LinkRoute[]; position?: string }> = ({
         position == "right" ? { marginLeft: "auto", marginRight: "5px" } : {}
       }
     >
-      {links.map((link: LinkRoute) => {
+      {links.map((link: Link) => {
         return (
           <div key={link.href} className={styles.link}>
-            <Link href={link.href}>
+            <a href={link.href}>
               <div
                 className={styles.center_image}
                 style={
@@ -41,7 +40,7 @@ const NavLinks: React.FC<{ links: LinkRoute[]; position?: string }> = ({
               >
                 <Image
                   src={link.icon}
-                  alt={link.icon}
+                  alt={link.label}
                   width={link.label != "" ? "30" : "60"}
                   style={link.is_profile ? { objectFit: "fill", borderRadius: "50%" } : {}}
                 />
@@ -49,7 +48,7 @@ const NavLinks: React.FC<{ links: LinkRoute[]; position?: string }> = ({
               {link.label != "" && (
                 <div className={styles.bottom_link}> {link.label} </div>
               )}
-            </Link>
+            </a>
           </div>
         );
       })}
