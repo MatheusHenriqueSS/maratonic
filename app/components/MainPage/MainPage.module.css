@@ -1,0 +1,41 @@
+.main_container {
+  position: absolute;
+  display: block;
+  text-align: justify;
+  border-radius: 3%;
+  margin-top: 100px; /* navbar (75px) + padding (25px) */
+  padding: 10px;
+  padding-left: 30px;
+  left: 25%;
+  width: 50%;
+  height: calc(
+    100% - 125px
+  ); /* navbar (75px) + top padding (25px) + bottom padding (25px) */
+  background: var(--white-background);
+  overflow-y: scroll;
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Create a beautiful scrollbar for Chrome, Safari and Opera */
+.main_container::-webkit-scrollbar {
+  width: 20px;
+}
+
+.main_container::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.main_container::-webkit-scrollbar-thumb {
+  background-color: #d6dee1;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+.main_container::-webkit-scrollbar-thumb:hover {
+  background-color: #a8bbbf;
+}
+/* end of scrollbar */
