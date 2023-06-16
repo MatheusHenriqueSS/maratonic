@@ -6,7 +6,7 @@
   left: 0;
 
   height: 75px;
-  background-color: #658BC3;
+  background-color: var(--nav-background);
   display: flex;
   align-items: center;
 }

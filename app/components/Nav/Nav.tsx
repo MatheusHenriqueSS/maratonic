@@ -40,7 +40,7 @@ const NavLinks: React.FC<{ links: Link[]; position?: string }> = ({
               >
                 <Image
                   src={link.icon}
-                  alt={link.label}
+                  alt={"Ícone"}
                   width={link.label != "" ? "30" : "60"}
                   style={link.is_profile ? { objectFit: "fill", borderRadius: "50%" } : {}}
                 />
@@ -60,7 +60,7 @@ const NavLogo: React.FC<{}> = () => {
   return (
     <div className={styles.logo_container}>
       <span>
-        <Image src={logo} alt="Maratonic logo" width="120" />
+        <Image src={logo} alt="Logo" width="120" />
       </span>
     </div>
   );
