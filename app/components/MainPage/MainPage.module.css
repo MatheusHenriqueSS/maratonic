@@ -3,13 +3,13 @@
   display: block;
   text-align: justify;
   border-radius: 10px;
-  margin-top: 100px; /* navbar (75px) + padding (25px) */
+  margin-top: 125px; /* navbar (75px) + padding (25px) */
   padding: 10px;
   padding-left: 30px;
   left: 12.5%;
   width: 75%;
   height: calc(
-    100% - 125px
+    100% - 150px
   ); /* navbar (75px) + top padding (25px) + bottom padding (25px) */
   background: var(--white-background);
   overflow-y: scroll;

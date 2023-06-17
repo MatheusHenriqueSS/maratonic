@@ -4,7 +4,7 @@
 
 :root {
   --foreground: #000000;
-  --background-gray: #d9d9d9;
+  --background: #c3d6f2;
   --nav-background: #658bc3;
   --white-background: #ffffff;
 }
@@ -12,7 +12,7 @@
 html,
 body {
   color: var(--foreground);
-  background: var(--background-gray);
+  background: var(--background);
   height: 100%;
   margin: 0;
 }
@@ -39,11 +39,11 @@ p {
 }
 
 p a {
-  color: #0000EE;
+  color: #0000ee;
 }
 
 p a:hover {
-  color: #7777FF;
+  color: #7777ff;
 }
 
 ul {
