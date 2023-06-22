@@ -12,13 +12,27 @@ test("should create new post ", async () => {
         type: PostType.POST,
         authorName: "testAuthorName",
         categories: [],
+        published: true,
+        authorId: "123",
         categoriesIDs: [],
     };
 
     prismaMock.post.create.mockResolvedValue(newPost);
+    prismaMock.user.findFirst.mockResolvedValue({
+        id: "123",
+        name: "sucras",
+        email: "sucras@mail.com",
+        emailVerified: null,
+        image: null,
+        role: "TEACHER",
+    });
 
-    const post = await postsRepositories.create("testAuthorName", "testTitle", "testContent");
-    expect(post.authorName).toBe("testAuthorName");
+    const post = await postsRepositories.create(
+        "testAuthorName",
+        "testTitle",
+        "testContent"
+    );
+    expect(post.authorId).toBe("123");
     expect(post.title).toBe("testTitle");
     expect(post.content).toBe("testContent");
 });
@@ -31,16 +45,17 @@ test("should list posts", async () => {
         title: "testTitle",
         content: "testContent",
         type: PostType.POST,
-        authorName: "testAuthorName",
+        authorId: "123",
         categories: [],
         categoriesIDs: [],
+        published: true,
     };
 
     prismaMock.post.findMany.mockResolvedValue([newPost]);
 
     const posts = await postsRepositories.list();
     expect(posts.length).toBe(1);
-    expect(posts[0].authorName).toBe("testAuthorName");
+    expect(posts[0].authorId).toBe("123");
     expect(posts[0].title).toBe("testTitle");
     expect(posts[0].content).toBe("testContent");
 });
@@ -92,7 +107,11 @@ test("should update a post", async () => {
     const updatedPostAuthorName = "UpdatedAuthorName";
     const updatedPostTitle = "UpdatedTitle";
     const updatedPostContent = "UpdatedContent";
-    const updateData: PostUpdateData = { authorName: updatedPostAuthorName, title: updatedPostTitle, content: updatedPostContent };
+    const updateData: PostUpdateData = {
+        authorName: updatedPostAuthorName,
+        title: updatedPostTitle,
+        content: updatedPostContent,
+    };
 
     const expectedUpdatedPost = {
         id: "382109475",

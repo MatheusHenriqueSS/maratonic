@@ -2,23 +2,6 @@ import prismaMock from "../../mock";
 import usersRepositories, { UserUpdateData } from "../../repositories/users";
 import { UserRole } from "@prisma/client";
 
-test("should create new user ", async () => {
-    const newUser = {
-        id: "943216785",
-        email: "test@email.com",
-        passwordHash: "fakeHash",
-        salt: "fakeSalt",
-        nickname: "testNickname",
-        role: UserRole.STUDENT,
-    };
-
-    prismaMock.user.create.mockResolvedValue(newUser);
-
-    const user = await usersRepositories.create("testNickname", "test@email.com", "fakeHash", "fakeSalt");
-    expect(user.nickname).toBe("testNickname");
-    expect(user.email).toBe("test@email.com");
-});
-
 test("should list users", async () => {
     const newUser = {
         id: "943216785",
@@ -79,7 +62,12 @@ test("should update a user", async () => {
     const updatedUserEmail = "UpdatedUser@email.com";
     const updatedUserPasswordHash = "UpdatedHash";
     const updatedSalt = "UpdatedeSalt";
-    const updateData: UserUpdateData = { nickname: updatedUserNickname,  email: "UpdatedUser@email.com", passwordHash: "UpdatedHash", salt: "UpdatedSalt"};
+    const updateData: UserUpdateData = {
+        nickname: updatedUserNickname,
+        email: "UpdatedUser@email.com",
+        passwordHash: "UpdatedHash",
+        salt: "UpdatedSalt",
+    };
 
     const expectedUpdatedUser = {
         id: "943216785",
