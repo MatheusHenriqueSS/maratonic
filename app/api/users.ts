@@ -2,9 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import usersController from "./controllers/users";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-    if (req.method === "POST") {
-        return usersController.create(req, res);
-    } else if (req.method === "GET") {
+    if (req.method === "GET") {
         return usersController.getAll(req, res);
     } else if (req.method === "PUT") {
         return usersController.updateById(req, res);

@@ -5,25 +5,6 @@ interface IdQuery {
     id: string;
 }
 
-const create = async (
-    req: NextApiRequest,
-    res: NextApiResponse
-): Promise<void> => {
-    try {
-        const { nickname, email, passwordHash, salt } = req.body;
-        const user = await usersRepository.create(
-            nickname,
-            email,
-            passwordHash,
-            salt
-        );
-        res.status(201).json(user);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Internal server error" });
-    }
-};
-
 const getAll = async (
     req: NextApiRequest,
     res: NextApiResponse
@@ -67,7 +48,6 @@ const updateById = async (
 };
 
 export default {
-    create,
     getAll,
     updateById,
     deletebyId,
