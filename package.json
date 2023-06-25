@@ -9,7 +9,7 @@
         "lint": "next lint",
         "generate": "npx prisma generate",
         "lint:fix": "npm run lint -- --fix",
-        "prettier": "npx prettier src --check",
+        "prettier": "npx prettier app --check",
         "prettier:fix": "npm run prettier -- --write",
         "format": "npm run prettier:fix && npm run lint:fix",
         "test": "jest"

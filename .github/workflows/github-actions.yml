@@ -22,6 +22,8 @@ jobs:
             - name: Install dependencies
               run: npm install
 
+            - name: "Create env file"
+              run: echo "${{ secrets.ENV_FILE }}" > .env
             - name: Gererate Prisma Client
               run: npm run generate
 

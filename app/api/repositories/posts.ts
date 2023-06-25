@@ -1,4 +1,4 @@
-import prisma from "../client"
+import prisma from "../client";
 
 export interface PostUpdateData {
   authorName?: string;
@@ -6,15 +6,30 @@ export interface PostUpdateData {
   content?: string;
 }
 
-async function create(authorName: string, title: string, content: string) {
-  const post = await prisma.post.create({
-    data: {
-      authorName,
-      title,
-      content,
+async function create(authorId: string, title: string, content: string) {
+  const postAuthor = await prisma.user.findFirst({
+    where: {
+      id: authorId,
     },
   });
-  return post;
+
+  if (postAuthor) {
+    const post = await prisma.post.create({
+      data: {
+        author: {
+          connect: {
+            id: postAuthor.id,
+          },
+        },
+        title,
+        content,
+      },
+    });
+
+    return post;
+  }
+
+  throw new Error("Failed to find post author");
 }
 
 async function list() {

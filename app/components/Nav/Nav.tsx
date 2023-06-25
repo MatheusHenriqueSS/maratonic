@@ -42,7 +42,11 @@ const NavLinks: React.FC<{ links: Link[]; position?: string }> = ({
                   src={link.icon}
                   alt={"Ícone"}
                   width={link.label != "" ? "30" : "60"}
-                  style={link.is_profile ? { objectFit: "fill", borderRadius: "50%" } : {}}
+                  style={
+                    link.is_profile
+                      ? { objectFit: "fill", borderRadius: "50%" }
+                      : {}
+                  }
                 />
               </div>
               {link.label != "" && (

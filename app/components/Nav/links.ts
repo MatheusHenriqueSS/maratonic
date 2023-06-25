@@ -3,7 +3,7 @@ import book_icon from "./icons/book.svg";
 import balloon_icon from "./icons/balloon.svg";
 import trophy_icon from "./icons/trophy.svg";
 import user_icon from "./icons/Union.svg";
-import incognito_icon from "./icons/incognito.svg"
+import incognito_icon from "./icons/incognito.svg";
 
 const route_links_data = {
   links: [

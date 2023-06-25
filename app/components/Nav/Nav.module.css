@@ -38,13 +38,13 @@
 
 .center_image {
   display: flex;
-  margin-top:5px;
+  margin-top: 5px;
   justify-content: center;
-  height:30px;
+  height: 30px;
 }
 
 .bottom_link {
-  display:flex;
+  display: flex;
   justify-content: center;
   height: 25px;
 

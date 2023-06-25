@@ -1,27 +1,10 @@
-import prisma from "../client"
+import prisma from "../client";
 
 export interface UserUpdateData {
   nickname?: string;
   email?: string;
   passwordHash?: string;
   salt?: string;
-}
-
-async function create(
-  nickname: string,
-  email: string,
-  passwordHash: string,
-  salt: string
-) {
-  const user = await prisma.user.create({
-    data: {
-      email,
-      nickname,
-      passwordHash,
-      salt,
-    },
-  });
-  return user;
 }
 
 async function list() {
@@ -45,7 +28,6 @@ async function updateById(id: string, data: UserUpdateData) {
 }
 
 export default {
-  create,
   list,
   deleteById,
   updateById,
