@@ -6,11 +6,10 @@ export interface PostUpdateData {
   content?: string;
 }
 
-async function create(authorName: string, title: string, content: string) {
+async function create(authorId: string, title: string, content: string) {
   const postAuthor = await prisma.user.findFirst({
     where: {
-      role: "TEACHER",
-      name: authorName,
+      id: authorId,
     },
   });
 

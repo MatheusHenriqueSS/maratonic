@@ -10,8 +10,8 @@ const create = async (
   res: NextApiResponse
 ): Promise<void> => {
   try {
-    const { authorName, title, content } = req.body;
-    const post = await postsRepository.create(authorName, title, content);
+    const { authorId, title, content } = req.body;
+    const post = await postsRepository.create(authorId, title, content);
     res.status(201).json(post);
   } catch (error) {
     console.error(error);
