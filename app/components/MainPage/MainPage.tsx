@@ -2,7 +2,8 @@ import React from "react";
 import styles from "./MainPage.module.css";
 
 const MainPage: React.FC<{}> = () => {
-  const discord_link = "https://www.google.com/url?q=https%3A%2F%2Fdiscord.gg%2FdkF7BmwKe8&sa=D&sntz=1&usg=AOvVaw2kZdAEQoEYve_hr-LaJQDT";
+  const discord_link =
+    "https://www.google.com/url?q=https%3A%2F%2Fdiscord.gg%2FdkF7BmwKe8&sa=D&sntz=1&usg=AOvVaw2kZdAEQoEYve_hr-LaJQDT";
   return (
     <div className={styles.main_container}>
       <h1 style={{ textAlign: "center" }}>Maratonic</h1>
