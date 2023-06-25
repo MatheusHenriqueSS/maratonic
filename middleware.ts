@@ -6,13 +6,13 @@ export default withAuth(
     async function middleware(req) {
         const token = await getToken({ req });
         const isAuth = !!token;
-        const isAuthPage =
+        const isLoginPage =
             req.nextUrl.pathname.startsWith("/login") ||
             req.nextUrl.pathname.startsWith("/register");
 
-        if (isAuthPage) {
+        if (isLoginPage) {
             if (isAuth) {
-                return NextResponse.redirect(new URL("/profile", req.url));
+                return NextResponse.redirect(new URL("/", req.url));
             }
 
             return null;
@@ -28,6 +28,8 @@ export default withAuth(
                 new URL(`/login?from=${encodeURIComponent(from)}`, req.url)
             );
         }
+
+        return null; // Allow access to all other pages for authenticated users
     },
     {
         callbacks: {
@@ -43,5 +45,5 @@ export default withAuth(
 
 //default endpoint?
 export const config = {
-    matcher: ["/profile/:path*", "/login", "/register"],
+    matcher: ["/login", "/register"],
 };
