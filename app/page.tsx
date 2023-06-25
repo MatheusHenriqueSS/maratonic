@@ -1,35 +1,15 @@
-import {
-    LoginButton,
-    LogoutButton,
-    ProfileButton,
-    RegisterButton,
-  } from "./components/buttons.component";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
-import { User } from "./components/user.component";
-import { redirect } from "next/navigation";
-  
-  export default async function Home() {
-    return (
-      <main
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "70vh",
-        }}
-      >
-        <div>
-          <LoginButton />
-          <RegisterButton />
-          <LogoutButton />
-          <ProfileButton />
-  
-          <h1>Server Session</h1>
-  
-          <User />
-        </div>
-      </main>
-    );
-  }
-  
+import Nav from "./components/Nav/Nav";
+import MainPage from "./components/MainPage/MainPage";
+
+export default async function Home() {
+  const session = await getServerSession(authOptions);
+
+  return (
+    <main>
+      <Nav is_logged={session?.user != null} />
+      <MainPage />
+    </main>
+  );
+}
