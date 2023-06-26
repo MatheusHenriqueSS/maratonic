@@ -1,71 +1,37 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import categoriesRepository, {
   CategoryUpdateData,
 } from "../repositories/categories";
+import { Controller, CRUD } from "./controller";
+import { Category } from "@prisma/client";
 
-interface IdQuery {
-  id: string;
+class CategoriesController extends Controller {
+  public createCRUD(): CRUD {
+    return new CategoriesCRUD();
+  }
 }
 
-const create = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<void> => {
-  try {
-    const { name } = req.body;
-    const category = await categoriesRepository.create(name);
-    res.status(201).json(category);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-};
+class CategoriesCRUD implements CRUD {
+  public create = async (body: any): Promise<Category> => {
+    const { name } = body;
+    return await categoriesRepository.create(name);
+  };
 
-const getAll = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<void> => {
-  try {
-    const categories = await categoriesRepository.list();
-    res.status(200).json(categories);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-};
+  public getAll = async (): Promise<Category[]> => {
+    return await categoriesRepository.list();
+  };
 
-const deletebyId = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<void> => {
-  try {
-    const { id } = req.query as unknown as IdQuery;
+  public updateById = async (
+    categoryUpdate: CategoryUpdateData,
+    id: string
+  ): Promise<Category> => {
+    return await categoriesRepository.updateById(id, categoryUpdate);
+  };
+
+  public deleteById = async (id: string): Promise<void> => {
     await categoriesRepository.deleteById(id);
-    res.status(204).end();
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-};
+  };
+}
 
-const updateById = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<void> => {
-  try {
-    const { id } = req.query as unknown as IdQuery;
-    const categoryUpdate: CategoryUpdateData = req.body;
-    const category = await categoriesRepository.updateById(id, categoryUpdate);
-    res.status(200).json(category);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-};
+const categoriesController = new CategoriesController();
 
-export default {
-  create,
-  getAll,
-  updateById,
-  deletebyId,
-};
+export default categoriesController;
