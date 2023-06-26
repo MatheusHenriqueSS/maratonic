@@ -55,8 +55,10 @@ Cada componente do projeto desempenha um papel fundamental na aplicação:
 - As pages representam as diferentes telas ou rotas do cliente, responsáveis por renderizar o conteúdo e interagir com os dados.
 - Os components são elementos modulares e reutilizáveis que compõem as páginas e ajudam na construção da interface do usuário.
 
-### Singleton como padrão de projeto no Repositories
+### Factory Method como padrão de projeto para os CRUDs
 
-Para garantir que haja sempre uma única instância do cliente do banco de dados (Prisma), o padrão _singleton_ foi usado. Há também um _singleton_ nos testes, que faz um _mock_ do singleton do repositories para testar as funções implementadas.
+Para evitar repetição de código, criamos uma classe abstrata *Controller*, que controla como um request da API será realizado nosso backend criando um CRUD abstrato.
 
-O _singleton_ usado nas funções do Repositories é exportado pelo arquivo _client.ts_ e o usado nos testes é exportado pelo arquivo _mock.ts_
+Como temos várias tabelas no banco de dados e as rotas CRUD são bem parecidas para cada uma delas, fizemos uma classe *Controller* para cada tabela, em que cada uma constrói seu próprio CRUD abstrato.
+
+Com o padrão de projeto adotado, evitaremos ter que modificar código em vários locais, caso precisemos modificar as tabelas do banco e/ou seus schemas.
