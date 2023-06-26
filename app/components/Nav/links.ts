@@ -5,6 +5,14 @@ import trophy_icon from "./icons/trophy.svg";
 import user_icon from "./icons/Union.svg";
 import incognito_icon from "./icons/incognito.svg";
 
+export type NavLink = {
+  label?: string;
+  href?: string;
+  action?: Function;
+  icon: string;
+  is_profile?: boolean;
+};
+
 const route_links_data = {
   links: [
     {
@@ -43,8 +51,7 @@ const login_links_data = {
 const logged_links_data = {
   links: [
     {
-      label: "",
-      href: "/bio",
+      href: "/profile",
       icon: user_icon,
       is_profile: true,
     },
