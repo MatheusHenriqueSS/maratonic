@@ -57,8 +57,8 @@ Cada componente do projeto desempenha um papel fundamental na aplicação:
 
 ### Factory Method como padrão de projeto para os CRUDs
 
-Para evitar repetição de código, criamos uma classe abstrata *Controller*, que controla como um request da API será realizado nosso backend criando um CRUD abstrato.
+Para evitar repetição de código, criamos uma classe abstrata *Controller*, que controla como um request da API será realizado nosso backend, criando uma interface de CRUD.
 
-Como temos várias tabelas no banco de dados e as rotas CRUD são bem parecidas para cada uma delas, fizemos uma classe *Controller* para cada tabela, em que cada uma constrói seu próprio CRUD abstrato.
+Como temos várias tabelas no banco de dados e as rotas CRUD são bem parecidas para cada uma delas, fizemos uma extensão classe *Controller* para cada tabela, em que cada uma constrói seu próprio CRUD abstrato. Assim aproveitamos o código que lida com a requisição.
 
 Com o padrão de projeto adotado, evitaremos ter que modificar código em vários locais, caso precisemos modificar as tabelas do banco e/ou seus schemas.
