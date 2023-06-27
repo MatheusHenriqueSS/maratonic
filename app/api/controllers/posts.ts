@@ -1,69 +1,35 @@
 import postsRepository, { PostUpdateData } from "../repositories/posts";
-import { NextApiRequest, NextApiResponse } from "next";
+import { Controller, CRUD } from "./controller";
+import { Post } from "@prisma/client";
 
-interface IdQuery {
-  id: string;
+class PostsController extends Controller {
+  public createCRUD(): CRUD {
+    return new PostsCRUD();
+  }
 }
 
-const create = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<void> => {
-  try {
-    const { authorId, title, content } = req.body;
-    const post = await postsRepository.create(authorId, title, content);
-    res.status(201).json(post);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-};
+class PostsCRUD implements CRUD {
+  public create = async (body: any): Promise<Post> => {
+    const { authorId, title, content } = body;
+    return await postsRepository.create(authorId, title, content);
+  };
 
-const getAll = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<void> => {
-  try {
-    const posts = await postsRepository.list();
-    res.status(200).json(posts);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-};
+  public getAll = async (): Promise<Post[]> => {
+    return await postsRepository.list();
+  };
 
-const deletebyId = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<void> => {
-  try {
-    const { id } = req.query as unknown as IdQuery;
+  public updateById = async (
+    postUpdateData: PostUpdateData,
+    id: string
+  ): Promise<Post> => {
+    return await postsRepository.updateById(id, postUpdateData);
+  };
+
+  public deleteById = async (id: string): Promise<void> => {
     await postsRepository.deleteById(id);
-    res.status(204).end();
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-};
+  };
+}
 
-const updateById = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<void> => {
-  try {
-    const { id } = req.query as unknown as IdQuery;
-    const postUpdate: PostUpdateData = req.body;
-    const post = await postsRepository.updateById(id, postUpdate);
-    res.status(200).json(post);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-};
+const postsController = new PostsController();
 
-export default {
-  create,
-  getAll,
-  updateById,
-  deletebyId,
-};
+export default postsController;

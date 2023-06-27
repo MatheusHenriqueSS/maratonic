@@ -1,54 +1,30 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import usersRepository, { UserUpdateData } from "../repositories/users";
+import { Controller, CRUD } from "./controller";
+import { User } from "@prisma/client";
 
-interface IdQuery {
-  id: string;
+class UsersController extends Controller {
+  public createCRUD(): CRUD {
+    return new UsersCRUD();
+  }
 }
 
-const getAll = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<void> => {
-  try {
-    const users = await usersRepository.list();
-    res.status(200).json(users);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-};
+class UsersCRUD implements CRUD {
+  getAll = async (): Promise<User[]> => {
+    return await usersRepository.list();
+  };
 
-const deletebyId = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<void> => {
-  try {
-    const { id } = req.query as unknown as IdQuery;
+  updateById = async (
+    userUpdateData: UserUpdateData,
+    id: string
+  ): Promise<User> => {
+    return await usersRepository.updateById(id, userUpdateData);
+  };
+
+  deleteById = async (id: string): Promise<void> => {
     await usersRepository.deleteById(id);
-    res.status(204).end();
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-};
+  };
+}
 
-const updateById = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<void> => {
-  try {
-    const { id } = req.query as unknown as IdQuery;
-    const updateUser: UserUpdateData = req.body;
-    const user = await usersRepository.updateById(id, updateUser);
-    res.status(200).json(user);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-};
+const usersController = new UsersController();
 
-export default {
-  getAll,
-  updateById,
-  deletebyId,
-};
+export default usersController;

@@ -1,7 +1,7 @@
 import { NextAuthProvider } from "./providers";
 import "./globals.css";
 import { Inter } from "next/font/google";
-import Toast from "../components/toast.component";
+import Toast from "./components/toast.component";
 
 const inter = Inter({ subsets: ["latin"] });
 

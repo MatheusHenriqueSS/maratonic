@@ -1,72 +1,37 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import problemsRepository, {
   ProblemUpdateData,
 } from "../repositories/problems";
+import { Controller, CRUD } from "./controller";
+import { Problem } from "@prisma/client";
 
-interface IdQuery {
-  id: string;
+class ProblemsController extends Controller {
+  public createCRUD(): CRUD {
+      return new ProblemsCRUD();
+  }
 }
 
-const create = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<void> => {
-  try {
-    const { link } = req.body;
-    const problem = await problemsRepository.create(link);
-    res.status(201).json(problem);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-};
+class ProblemsCRUD implements CRUD {
+  public create = async (body: any): Promise<Problem> => {
+    const { link } = body;
+    return await problemsRepository.create(link);
+  };
 
-const getAll = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<void> => {
-  try {
-    const problems = await problemsRepository.list();
-    res.status(200).json(problems);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-};
+  public getAll = async (): Promise<Problem[]> => {
+    return await problemsRepository.list();
+  };
 
-const deletebyId = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<void> => {
-  try {
-    const { id } = req.query as unknown as IdQuery;
+  public deleteById = async (id: string): Promise<void> => {
     await problemsRepository.deleteById(id);
-    res.status(204).end();
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-};
+  };
 
-// Verificar
-const updateById = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<void> => {
-  try {
-    const { id } = req.query as unknown as IdQuery;
-    const problemUpdate: ProblemUpdateData = req.body;
-    const problem = await problemsRepository.updateById(id, problemUpdate);
-    res.status(200).json(problem);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-};
+  public updateById = async (
+    problemUpdateData: ProblemUpdateData,
+    id: string
+  ): Promise<Problem> => {
+    return await problemsRepository.updateById(id, problemUpdateData);
+  };
+}
 
-export default {
-  create,
-  getAll,
-  updateById,
-  deletebyId,
-};
+const problemsController = new ProblemsController();
+
+export default problemsController;

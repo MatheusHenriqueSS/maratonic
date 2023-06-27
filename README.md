@@ -55,8 +55,32 @@ Cada componente do projeto desempenha um papel fundamental na aplicação:
 - As pages representam as diferentes telas ou rotas do cliente, responsáveis por renderizar o conteúdo e interagir com os dados.
 - Os components são elementos modulares e reutilizáveis que compõem as páginas e ajudam na construção da interface do usuário.
 
-### Singleton como padrão de projeto no Repositories
+Entre as principais componentes das pages e components, temos:
 
-Para garantir que haja sempre uma única instância do cliente do banco de dados (Prisma), o padrão _singleton_ foi usado. Há também um _singleton_ nos testes, que faz um _mock_ do singleton do repositories para testar as funções implementadas.
+#### Pages
 
-O _singleton_ usado nas funções do Repositories é exportado pelo arquivo _client.ts_ e o usado nos testes é exportado pelo arquivo _mock.ts_
+Cada componente da page é uma rota (e página) da aplicação, sendo as principais:
+
+- /: Rota da página principal da aplicação, onde o usuário pode ver uma descrição do MaratonIC e logar na aplicação. Depois que o usuário fizer o login, ele pode navegar para as outras páginas através da NavBar.
+- /login: Rota da página em que o usuário pode fazer login com seu email, google ou github.
+- /profile: Rota para a página de perfil de usuário, onde ele pode ver e alterar seus dados na plataforma.
+- /problems: Rota para a página de problemas, onde um usuário pode ver os problemas cadastrados na plataforma.
+- /classes: Rota para a página de aulas, onde o usuário pode ver o conteúdo de cada aula.
+- /standings: Rota para a página de ranking de alunos, onde os alunos são ranqueados a partir de quantos problemas resolveram.
+
+#### Components
+
+Os components são componentes pequenas usadas pelas pages. Sendo as principais:
+
+- NavBar: Barra de navegação do site, com os links para cada página.
+- MainPage: Container principal da página inicial do site (na rota /).
+- Problem: Card de problema usado na página de problemas.
+- Class: Card de aulas usado na página de aulas.
+
+### Factory Method como padrão de projeto para os CRUDs
+
+Para evitar repetição de código, criamos uma classe abstrata *Controller*, que controla como um request da API será realizado nosso backend, criando uma interface de CRUD.
+
+Como temos várias tabelas no banco de dados e as rotas CRUD são bem parecidas para cada uma delas, fizemos uma extensão classe *Controller* para cada tabela, em que cada uma constrói seu próprio CRUD abstrato. Assim aproveitamos o código que lida com a requisição.
+
+Com o padrão de projeto adotado, evitaremos ter que modificar código em vários locais, caso precisemos modificar as tabelas do banco e/ou seus schemas. Além disso, fica mais fácil de adicionar novas tabelas, tornando a aplicação apta a mudanças de forma simples.

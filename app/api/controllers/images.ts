@@ -1,69 +1,39 @@
 import imagesRepository, { ImageUpdateData } from "../repositories/images";
-import { NextApiRequest, NextApiResponse } from "next";
+import { Controller, CRUD } from "./controller";
+import { Image } from "@prisma/client"
 
-interface IdQuery {
-  id: string;
+class ImagesController extends Controller {
+  public createCRUD(): CRUD {
+    return new ImagesCRUD();
+  }
 }
 
-const create = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<void> => {
-  try {
-    const { name, bytes } = req.body;
-    const image = await imagesRepository.create(name, bytes);
-    res.status(201).json(image);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-};
+class ImagesCRUD implements CRUD {
+  public create = async (
+    body: any
+  ): Promise<Image> => {
+      const { name, bytes } = body;
+      return await imagesRepository.create(name, bytes);
+  };
 
-const getAll = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<void> => {
-  try {
-    const images = await imagesRepository.list();
-    res.status(200).json(images);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-};
+  public getAll = async (): Promise<Image[]> => {
+      return await imagesRepository.list();
+  };
 
-const deletebyId = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<void> => {
-  try {
-    const { id } = req.query as unknown as IdQuery;
+  public updateById = async (
+    image: ImageUpdateData, id: string
+  ): Promise<Image> => {
+      const imageUpdateData: ImageUpdateData = image;
+      return await imagesRepository.updateById(id, imageUpdateData);
+  };
+
+  public deleteById = async (
+    id: string
+  ): Promise<void> => {
     await imagesRepository.deleteById(id);
-    res.status(204).end();
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-};
+  };
+}
 
-const updateById = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<void> => {
-  try {
-    const { id } = req.query as unknown as IdQuery;
-    const imageUpdate: ImageUpdateData = req.body;
-    const image = await imagesRepository.updateById(id, imageUpdate);
-    res.status(200).json(image);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-};
+const imagesController = new ImagesController();
 
-export default {
-  create,
-  getAll,
-  updateById,
-  deletebyId,
-};
+export default imagesController;
