@@ -4,7 +4,7 @@ import categoriesRepository, {
 import { Controller, CRUD } from "./controller";
 import { Category } from "@prisma/client";
 
-class CategoriesController extends Controller {
+export default class CategoriesController extends Controller {
   public createCRUD(): CRUD {
     return new CategoriesCRUD();
   }
@@ -12,8 +12,7 @@ class CategoriesController extends Controller {
 
 class CategoriesCRUD implements CRUD {
   public create = async (body: any): Promise<Category> => {
-    const { name } = body;
-    return await categoriesRepository.create(name);
+    return await categoriesRepository.create(body.name);
   };
 
   public getAll = async (): Promise<Category[]> => {
@@ -31,7 +30,3 @@ class CategoriesCRUD implements CRUD {
     await categoriesRepository.deleteById(id);
   };
 }
-
-const categoriesController = new CategoriesController();
-
-export default categoriesController;

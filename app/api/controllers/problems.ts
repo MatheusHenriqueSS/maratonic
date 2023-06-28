@@ -4,7 +4,7 @@ import problemsRepository, {
 import { Controller, CRUD } from "./controller";
 import { Problem } from "@prisma/client";
 
-class ProblemsController extends Controller {
+export default class ProblemsController extends Controller {
   public createCRUD(): CRUD {
     return new ProblemsCRUD();
   }
@@ -12,8 +12,7 @@ class ProblemsController extends Controller {
 
 class ProblemsCRUD implements CRUD {
   public create = async (body: any): Promise<Problem> => {
-    const { link } = body;
-    return await problemsRepository.create(link);
+    return await problemsRepository.create(body.link, body.categoriesIDs);
   };
 
   public getAll = async (): Promise<Problem[]> => {
@@ -31,7 +30,3 @@ class ProblemsCRUD implements CRUD {
     return await problemsRepository.updateById(id, problemUpdateData);
   };
 }
-
-const problemsController = new ProblemsController();
-
-export default problemsController;

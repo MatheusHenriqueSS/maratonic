@@ -2,7 +2,7 @@ import postsRepository, { PostUpdateData } from "../repositories/posts";
 import { Controller, CRUD } from "./controller";
 import { Post } from "@prisma/client";
 
-class PostsController extends Controller {
+export default class PostsController extends Controller {
   public createCRUD(): CRUD {
     return new PostsCRUD();
   }
@@ -10,8 +10,7 @@ class PostsController extends Controller {
 
 class PostsCRUD implements CRUD {
   public create = async (body: any): Promise<Post> => {
-    const { authorId, title, content } = body;
-    return await postsRepository.create(authorId, title, content);
+    return await postsRepository.create(body.authorId, body.title, body.content, body.categoriesIDs);
   };
 
   public getAll = async (): Promise<Post[]> => {
@@ -29,7 +28,3 @@ class PostsCRUD implements CRUD {
     await postsRepository.deleteById(id);
   };
 }
-
-const postsController = new PostsController();
-
-export default postsController;

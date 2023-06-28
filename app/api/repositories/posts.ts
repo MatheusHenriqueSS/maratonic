@@ -4,32 +4,25 @@ export interface PostUpdateData {
   authorName?: string;
   title?: string;
   content?: string;
+  categoriesIDs: string[];
 }
 
-async function create(authorId: string, title: string, content: string) {
-  const postAuthor = await prisma.user.findFirst({
-    where: {
-      id: authorId,
+async function create(
+  authorId: string,
+  title: string,
+  content: string,
+  categoriesIDs: string[]
+) {
+  const post = await prisma.post.create({
+    data: {
+      authorId: authorId,
+      title: title,
+      content: content,
+      categoriesIDs: categoriesIDs,
     },
   });
 
-  if (postAuthor) {
-    const post = await prisma.post.create({
-      data: {
-        author: {
-          connect: {
-            id: postAuthor.id,
-          },
-        },
-        title,
-        content,
-      },
-    });
-
-    return post;
-  }
-
-  throw new Error("Failed to find post author");
+  return post;
 }
 
 async function list() {
@@ -39,15 +32,15 @@ async function list() {
 
 async function deleteById(id: string) {
   const post = await prisma.post.delete({
-    where: { id },
+    where: { id: id },
   });
   return post;
 }
 
 async function updateById(id: string, data: PostUpdateData) {
   const post = await prisma.post.update({
-    where: { id },
-    data,
+    where: { id: id },
+    data: data,
   });
   return post;
 }
