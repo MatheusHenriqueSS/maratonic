@@ -6,7 +6,7 @@ import { Problem } from "@prisma/client";
 
 class ProblemsController extends Controller {
   public createCRUD(): CRUD {
-      return new ProblemsCRUD();
+    return new ProblemsCRUD();
   }
 }
 

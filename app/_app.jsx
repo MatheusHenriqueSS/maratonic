@@ -1,5 +1,5 @@
 import React from "react";
-import { SessionProvider } from "next-auth/react"
+import { SessionProvider } from "next-auth/react";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 

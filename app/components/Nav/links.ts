@@ -4,9 +4,8 @@ import balloonIcon from "./icons/balloon.svg";
 import trophyIcon from "./icons/trophy.svg";
 import userIcon from "./icons/Union.svg";
 import incognitoIcon from "./icons/incognito.svg";
-import plusIcon from "./icons/plus.svg"
-import brushIcon from "./icons/brush.svg"
-
+import plusIcon from "./icons/plus.svg";
+import brushIcon from "./icons/brush.svg";
 
 export type NavLink = {
   label?: string;
@@ -90,7 +89,15 @@ const authenticatedRightLinksData = {
 export const unauthenticatedLeftLinks = JSON.parse(
   JSON.stringify(unauthenticatedLeftLinksData)
 ).links;
-export const studentsLeftLinks = JSON.parse(JSON.stringify(studentsLeftLinksData)).links;
-export const teachersLeftLinks = JSON.parse(JSON.stringify(teachersLeftLinksData)).links;
-export const unauthenticatedRightLinks = JSON.parse(JSON.stringify(unauthenticatedRightLinksData)).links;
-export const authenticatedRightLinks = JSON.parse(JSON.stringify(authenticatedRightLinksData)).links;
+export const studentsLeftLinks = JSON.parse(
+  JSON.stringify(studentsLeftLinksData)
+).links;
+export const teachersLeftLinks = JSON.parse(
+  JSON.stringify(teachersLeftLinksData)
+).links;
+export const unauthenticatedRightLinks = JSON.parse(
+  JSON.stringify(unauthenticatedRightLinksData)
+).links;
+export const authenticatedRightLinks = JSON.parse(
+  JSON.stringify(authenticatedRightLinksData)
+).links;
