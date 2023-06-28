@@ -30,6 +30,7 @@ const problemsLink = {
   href: "/problems",
   icon: balloonIcon,
 };
+
 const standingsLink = {
   label: "Placar",
   href: "/standings",
@@ -37,13 +38,13 @@ const standingsLink = {
 };
 
 const createClassLink = {
-  label: "Criar aula",
+  label: "Nova aula",
   href: "/create/class",
   icon: brushIcon,
 };
 
 const addProblemLink = {
-  label: "Adicionar problema",
+  label: "Novo problema",
   href: "/create/problem",
   icon: plusIcon,
 };
