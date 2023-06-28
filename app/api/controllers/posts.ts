@@ -10,7 +10,7 @@ export default class PostsController extends Controller {
 
 class PostsCRUD implements CRUD {
   public create = async (body: any): Promise<Post> => {
-    return await postsRepository.create(body.authorId, body.title, body.content);
+    return await postsRepository.create(body.authorId, body.title, body.content, body.categoriesIDs);
   };
 
   public getAll = async (): Promise<Post[]> => {
