@@ -21,8 +21,8 @@ async function create(authorId: string, title: string, content: string) {
             id: postAuthor.id,
           },
         },
-        title,
-        content,
+        title: title,
+        content: content,
       },
     });
 
@@ -39,15 +39,15 @@ async function list() {
 
 async function deleteById(id: string) {
   const post = await prisma.post.delete({
-    where: { id },
+    where: { id: id },
   });
   return post;
 }
 
 async function updateById(id: string, data: PostUpdateData) {
   const post = await prisma.post.update({
-    where: { id },
-    data,
+    where: { id: id },
+    data: data,
   });
   return post;
 }

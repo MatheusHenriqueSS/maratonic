@@ -10,8 +10,7 @@ export default class ImagesController extends Controller {
 
 class ImagesCRUD implements CRUD {
   public create = async (body: any): Promise<Image> => {
-    const { name, bytes } = body;
-    return await imagesRepository.create(name, bytes);
+    return await imagesRepository.create(body.name, body.bytes);
   };
 
   public getAll = async (): Promise<Image[]> => {

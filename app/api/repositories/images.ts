@@ -8,8 +8,8 @@ export interface ImageUpdateData {
 async function create(name: string, bytes: Buffer) {
   const image = await prisma.image.create({
     data: {
-      name,
-      bytes,
+      name: name,
+      bytes: bytes,
     },
   });
   return image;
@@ -22,15 +22,15 @@ async function list() {
 
 async function deleteById(id: string) {
   const image = await prisma.image.delete({
-    where: { id },
+    where: { id: id },
   });
   return image;
 }
 
 async function updateById(id: string, data: ImageUpdateData) {
   const image = await prisma.image.update({
-    where: { id },
-    data,
+    where: { id: id },
+    data: data,
   });
   return image;
 }

@@ -12,8 +12,7 @@ export default class CategoriesController extends Controller {
 
 class CategoriesCRUD implements CRUD {
   public create = async (body: any): Promise<Category> => {
-    const { name } = body;
-    return await categoriesRepository.create(name);
+    return await categoriesRepository.create(body.name);
   };
 
   public getAll = async (): Promise<Category[]> => {

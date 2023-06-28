@@ -7,7 +7,7 @@ export interface CategoryUpdateData {
 async function create(name: string) {
   const category = await prisma.category.create({
     data: {
-      name,
+      name: name,
     },
   });
   return category;
@@ -20,15 +20,15 @@ async function list() {
 
 async function deleteById(id: string) {
   const category = await prisma.category.delete({
-    where: { id },
+    where: { id: id },
   });
   return category;
 }
 
 async function updateById(id: string, data: CategoryUpdateData) {
   const category = await prisma.category.update({
-    where: { id },
-    data,
+    where: { id: id },
+    data: data,
   });
   return category;
 }

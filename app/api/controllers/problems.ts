@@ -12,8 +12,7 @@ export default class ProblemsController extends Controller {
 
 class ProblemsCRUD implements CRUD {
   public create = async (body: any): Promise<Problem> => {
-    const { link } = body;
-    return await problemsRepository.create(link);
+    return await problemsRepository.create(body.link, body.categoriesIDs);
   };
 
   public getAll = async (): Promise<Problem[]> => {

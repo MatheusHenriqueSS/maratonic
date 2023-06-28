@@ -2,12 +2,13 @@ import prisma from "../client";
 
 export interface ProblemUpdateData {
   link?: string;
+  categoriesIDs: string[]
 }
 
-async function create(link: string) {
+async function create(link: string, categoriesIDs: string[]) {
   const problem = await prisma.problem.create({
     data: {
-      link,
+      link: link,
     },
   });
   return problem;
@@ -20,15 +21,15 @@ async function list() {
 
 async function deleteById(id: string) {
   const problem = await prisma.problem.delete({
-    where: { id },
+    where: { id: id },
   });
   return problem;
 }
 
 async function updateById(id: string, data: ProblemUpdateData) {
   const problem = await prisma.problem.update({
-    where: { id },
-    data,
+    where: { id: id },
+    data: data,
   });
   return problem;
 }

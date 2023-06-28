@@ -14,15 +14,15 @@ async function list() {
 
 async function deleteById(id: string) {
   const user = await prisma.user.delete({
-    where: { id },
+    where: { id: id },
   });
   return user;
 }
 
 async function updateById(id: string, data: UserUpdateData) {
   const user = await prisma.user.update({
-    where: { id },
-    data,
+    where: { id: id },
+    data: data,
   });
   return user;
 }

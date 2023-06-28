@@ -8,7 +8,8 @@ export abstract class Controller {
 
     if (req.method === "POST" && crud.create) {
       try {
-        const objectCreated = await crud.create(req.body);
+        const data = await req.json();
+        const objectCreated = await crud.create(data);
         return NextResponse.json(objectCreated, { status: 201 });
       } catch (error) {
         console.error(error);
@@ -42,8 +43,9 @@ export abstract class Controller {
         );
       }
       try {
-        const post = crud.updateById(req.body, id);
-        return NextResponse.json(post, { status: 200 });
+        const data = await req.json()
+        const objectUpdated = crud.updateById(data, id);
+        return NextResponse.json(objectUpdated, { status: 200 });
       } catch (error) {
         console.error(error);
         return NextResponse.json(
