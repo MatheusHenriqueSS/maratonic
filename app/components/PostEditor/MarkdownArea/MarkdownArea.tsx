@@ -1,0 +1,15 @@
+import {useEditor} from '../useEditor'
+import parse from 'html-react-parser'
+import styles from './MarkdownArea.module.css'
+
+export function MarkdownArea() {
+    const {getMarkDownAsHTMLOutput} = useEditor()
+    const output = parse(getMarkDownAsHTMLOutput())
+    
+    return (
+        <div className={styles.container}>
+        <h2 className={styles.title}>Markdown Output</h2>
+        <div className={styles['markdown-output']}>{output}</div>
+        </div>
+    )
+}
