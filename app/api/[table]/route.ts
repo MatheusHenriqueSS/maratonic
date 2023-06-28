@@ -45,7 +45,7 @@ async function Handler(req: Request, tableName: string) {
       { status: 500 }
     );
   }
-  return controller.requestHandler(req);
+  return await controller.requestHandler(req);
 }
 
 export async function GET(req: Request, context: Context) {
