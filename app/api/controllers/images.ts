@@ -2,7 +2,7 @@ import imagesRepository, { ImageUpdateData } from "../repositories/images";
 import { Controller, CRUD } from "./controller";
 import { Image } from "@prisma/client";
 
-class ImagesController extends Controller {
+export default class ImagesController extends Controller {
   public createCRUD(): CRUD {
     return new ImagesCRUD();
   }
@@ -30,7 +30,3 @@ class ImagesCRUD implements CRUD {
     await imagesRepository.deleteById(id);
   };
 }
-
-const imagesController = new ImagesController();
-
-export default imagesController;

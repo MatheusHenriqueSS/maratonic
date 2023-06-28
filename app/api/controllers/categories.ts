@@ -4,7 +4,7 @@ import categoriesRepository, {
 import { Controller, CRUD } from "./controller";
 import { Category } from "@prisma/client";
 
-class CategoriesController extends Controller {
+export default class CategoriesController extends Controller {
   public createCRUD(): CRUD {
     return new CategoriesCRUD();
   }
@@ -31,7 +31,3 @@ class CategoriesCRUD implements CRUD {
     await categoriesRepository.deleteById(id);
   };
 }
-
-const categoriesController = new CategoriesController();
-
-export default categoriesController;

@@ -2,7 +2,7 @@ import postsRepository, { PostUpdateData } from "../repositories/posts";
 import { Controller, CRUD } from "./controller";
 import { Post } from "@prisma/client";
 
-class PostsController extends Controller {
+export default class PostsController extends Controller {
   public createCRUD(): CRUD {
     return new PostsCRUD();
   }
@@ -29,7 +29,3 @@ class PostsCRUD implements CRUD {
     await postsRepository.deleteById(id);
   };
 }
-
-const postsController = new PostsController();
-
-export default postsController;

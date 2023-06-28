@@ -1,65 +1,80 @@
-import { NextApiRequest, NextApiResponse } from "next";
-
-interface IdQuery {
-  id: string;
-}
+import { NextResponse } from "next/server";
 
 export abstract class Controller {
   public abstract createCRUD(): CRUD;
 
-  public async requestHandler(
-    req: NextApiRequest,
-    res: NextApiResponse
-  ): Promise<void> {
+  public async requestHandler(req: Request): Promise<Response> {
     const crud = this.createCRUD();
 
     if (req.method === "POST" && crud.create) {
       try {
         const objectCreated = await crud.create(req.body);
-        res.status(201).json(objectCreated);
+        return NextResponse.json(objectCreated, { status: 201 });
       } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Internal server error" });
+        return NextResponse.json(
+          { error: "Internal server error" },
+          { status: 500 }
+        );
       }
-      return;
     }
 
     if (req.method === "GET" && crud.getAll) {
       try {
         const results = await crud.getAll();
-        res.status(200).json(results);
+        return NextResponse.json(results, { status: 200 });
       } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Internal server error" });
+        return NextResponse.json(
+          { error: "Internal server error" },
+          { status: 500 }
+        );
       }
-      return;
     }
 
     if (req.method === "PUT" && crud.updateById) {
+      const id = new URL(req.url).searchParams.get("id");
+      if (!id) {
+        console.log("ID wasn't passed as parameter.");
+        return NextResponse.json(
+          { error: "Internal server error" },
+          { status: 500 }
+        );
+      }
       try {
-        const { id } = req.query as unknown as IdQuery;
         const post = crud.updateById(req.body, id);
-        res.status(200).json(post);
+        return NextResponse.json(post, { status: 200 });
       } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Internal server error" });
+        return NextResponse.json(
+          { error: "Internal server error" },
+          { status: 500 }
+        );
       }
-      return;
     }
 
     if (req.method === "DELETE" && crud.deleteById) {
       try {
-        const { id } = req.query as unknown as IdQuery;
+        const id = new URL(req.url).searchParams.get("id");
+        if (!id) {
+          console.log("ID wasn't passed as parameter.");
+          return NextResponse.json(
+            { error: "Internal server error" },
+            { status: 500 }
+          );
+        }
         await crud.deleteById(id);
-        res.status(204).end();
+        return NextResponse.json({}, { status: 204 });
       } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Internal server error" });
+        return NextResponse.json(
+          { error: "Internal server error" },
+          { status: 500 }
+        );
       }
-      return;
     }
 
-    res.status(405).end(); // Method Not Allowed
+    return NextResponse.json({}, { status: 405 });
   }
 }
 

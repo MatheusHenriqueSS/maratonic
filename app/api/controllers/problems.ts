@@ -4,7 +4,7 @@ import problemsRepository, {
 import { Controller, CRUD } from "./controller";
 import { Problem } from "@prisma/client";
 
-class ProblemsController extends Controller {
+export default class ProblemsController extends Controller {
   public createCRUD(): CRUD {
     return new ProblemsCRUD();
   }
@@ -31,7 +31,3 @@ class ProblemsCRUD implements CRUD {
     return await problemsRepository.updateById(id, problemUpdateData);
   };
 }
-
-const problemsController = new ProblemsController();
-
-export default problemsController;
