@@ -18,7 +18,7 @@ async function create(
       authorId: authorId,
       title: title,
       content: content,
-      categoriesIDs: categoriesIDs,
+      categories: categoriesIDs,
     },
   });
 

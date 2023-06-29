@@ -43,7 +43,7 @@ export abstract class Controller {
         );
       }
       try {
-        const data = await req.json()
+        const data = await req.json();
         const objectUpdated = crud.updateById(data, id);
         return NextResponse.json(objectUpdated, { status: 200 });
       } catch (error) {

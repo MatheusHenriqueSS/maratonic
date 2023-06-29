@@ -2,7 +2,7 @@ import prisma from "../client";
 
 export interface ProblemUpdateData {
   link?: string;
-  categoriesIDs: string[]
+  categoriesIDs: string[];
 }
 
 async function create(link: string, categoriesIDs: string[]) {

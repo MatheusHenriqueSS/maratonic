@@ -1,110 +1,99 @@
 datasource db {
-  provider = "mongodb"
-  url      = env("DATABASE_URL")
+    provider = "mongodb"
+    url      = env("DATABASE_URL")
 }
 
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 model Account {
-  id                String  @id @default(cuid()) @map("_id")
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String? @db.String
-  access_token      String? @db.String
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String? @db.String
-  session_state     String?
+    id                String  @id @default(auto()) @map("_id") @db.ObjectId
+    userId            String
+    type              String
+    provider          String
+    providerAccountId String
+    refresh_token     String? @db.String
+    access_token      String? @db.String
+    expires_at        Int?
+    token_type        String?
+    scope             String?
+    id_token          String? @db.String
+    session_state     String?
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([provider, providerAccountId])
+    @@unique([provider, providerAccountId])
 }
 
 model Session {
-  id           String   @id @default(cuid()) @map("_id")
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    id           String   @id @default(auto()) @map("_id") @db.ObjectId
+    sessionToken String   @unique
+    userId       String
+    expires      DateTime
+    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model User {
-  id            String    @id @default(cuid()) @map("_id")
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-  Post          Post[]
-  role          UserRole  @default(STUDENT)
+    id            String    @id @default(auto()) @map("_id") @db.ObjectId
+    name          String?
+    email         String?   @unique
+    emailVerified DateTime?
+    image         String?
+    accounts      Account[]
+    sessions      Session[]
+    role          UserRole  @default(STUDENT)
 }
 
 model Category {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  name        String
-  posts       Post[]    @relation(fields: [postsIDs], references: [id])
-  postsIDs    String[]  @map("_posts") @db.ObjectId
-  problems    Problem[] @relation(fields: [problemsIDs], references: [id])
-  problemsIDs String[]  @map("_problems") @db.ObjectId
+    id   String @id @default(auto()) @map("_id") @db.ObjectId
+    name String
 }
 
 model Post {
-  id            String     @id @default(cuid()) @map("_id") @db.ObjectId
-  title         String
-  content       Json?
-  published     Boolean    @default(false)
-  createdAt     DateTime   @default(now()) @map(name: "created_at")
-  updatedAt     DateTime   @default(now()) @map(name: "updated_at")
-  authorId      String
-  type          PostType   @default(POST)
-  categories    Category[] @relation(fields: [categoriesIDs], references: [id])
-  categoriesIDs String[]   @db.ObjectId
-
-  author User @relation(fields: [authorId], references: [id])
-
-  @@map(name: "posts")
+    id         String   @id @default(auto()) @map("_id") @db.ObjectId
+    title      String
+    content    String
+    published  Boolean  @default(false)
+    createdAt  DateTime @default(now()) @map(name: "created_at")
+    updatedAt  DateTime @default(now()) @map(name: "updated_at")
+    authorId   String
+    type       PostType @default(POST)
+    categories String[]
 }
 
 model Problem {
-  id            String     @id @default(auto()) @map("_id") @db.ObjectId
-  link          String
-  categories    Category[] @relation(fields: [categoriesIDs], references: [id])
-  categoriesIDs String[]   @db.ObjectId
+    id         String   @id @default(cuid()) @map("_id") @db.ObjectId
+    link       String
+    categories String[]
 }
 
 model Image {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  name      String   @unique
-  bytes     Bytes
-  createdAt DateTime @default(now())
+    id        String   @id @default(cuid()) @map("_id") @db.ObjectId
+    name      String   @unique
+    bytes     Bytes
+    createdAt DateTime @default(now())
 }
 
 model VerificationToken {
-  identifier String
-  token      String   @id @map("_id")
-  expires    DateTime
+    identifier String
+    token      String   @id @map("_id")
+    expires    DateTime
 
-  @@unique([identifier, token])
+    @@unique([identifier, token])
 }
 
 type ProblemsStatus {
-  solved Int @default(0)
-  tried  Int @default(0)
+    solved Int @default(0)
+    tried  Int @default(0)
 }
 
 enum UserRole {
-  TEACHER
-  STUDENT
+    TEACHER
+    STUDENT
 }
 
 enum PostType {
-  POST
-  SOLUTION
+    POST
+    SOLUTION
 }
