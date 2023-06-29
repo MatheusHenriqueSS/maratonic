@@ -14,7 +14,7 @@ class PostsCRUD implements CRUD {
       body.authorId,
       body.title,
       body.content,
-      body.categoriesIDs
+      body.categories
     );
   };
 

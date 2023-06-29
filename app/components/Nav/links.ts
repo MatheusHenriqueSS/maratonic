@@ -39,7 +39,7 @@ const standingsLink = {
 
 const createClassLink = {
   label: "Nova aula",
-  href: "/create/class",
+  href: "/editor",
   icon: brushIcon,
 };
 
