@@ -47,6 +47,8 @@ const ProfileContainer: React.FC<{}> = () => {
   const { data: session } = useSession();
   const [user, setUser] = useState<User>();
   const [userName, setUserName] = useState<string>("");
+  const [numberUserProblemsSolved, setNumberUserProblemsSolved] = useState<number>(0);
+  const [numberUserProblemsTried, setNumberUserProblemsTried] = useState<number>(0);
   const [rank, setRank] = useState<string>("");
 
   if (!user) {
@@ -66,7 +68,9 @@ const ProfileContainer: React.FC<{}> = () => {
         if (!user) return;
 
         setUserName(user.name ? user.name : "Sem nome ainda😔");
-        setRank(RankingUtils.getRanking(78));
+        setNumberUserProblemsSolved(user.problemsSolvedIds.length);
+        setNumberUserProblemsTried(user.problemsTriedIds.length);
+        setRank(RankingUtils.getRanking(user.problemsSolvedIds.length));
         console.log(rank);
       })
       .catch(() => console.log("user not found"));
@@ -105,8 +109,8 @@ const ProfileContainer: React.FC<{}> = () => {
       </div>
 
       <div className={styles.doubleItemContainer}>
-        <DataContainer dataName="Problemas Resolvidos" dataInfo={"78"} />
-        <DataContainer dataName="Problemas Tentados" dataInfo={"90"} />
+        <DataContainer dataName="Problemas Resolvidos" dataInfo={numberUserProblemsSolved.toString()} />
+        <DataContainer dataName="Problemas Tentados" dataInfo={numberUserProblemsTried.toString()} />
       </div>
 
       <div className={styles.doubleItemContainer}>
