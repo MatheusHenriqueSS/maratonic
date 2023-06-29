@@ -52,6 +52,6 @@
 }
 
 .link:hover {
-  border-radius: 25%;
+  border-radius: 10px;
   background: #658bc3;
 }

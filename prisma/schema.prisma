@@ -8,7 +8,7 @@ generator client {
 }
 
 model Account {
-    id                String  @id @default(cuid()) @map("_id")
+    id                String  @id @default(auto()) @map("_id") @db.ObjectId
     userId            String
     type              String
     provider          String
@@ -27,7 +27,7 @@ model Account {
 }
 
 model Session {
-    id           String   @id @default(cuid()) @map("_id")
+    id           String   @id @default(auto()) @map("_id") @db.ObjectId
     sessionToken String   @unique
     userId       String
     expires      DateTime
@@ -35,52 +35,41 @@ model Session {
 }
 
 model User {
-    id            String    @id @default(cuid()) @map("_id")
+    id            String    @id @default(auto()) @map("_id") @db.ObjectId
     name          String?
     email         String?   @unique
     emailVerified DateTime?
     image         String?
     accounts      Account[]
     sessions      Session[]
-    Post          Post[]
     role          UserRole  @default(STUDENT)
 }
 
 model Category {
-    id          String    @id @default(auto()) @map("_id") @db.ObjectId
-    name        String
-    posts       Post[]    @relation(fields: [postsIDs], references: [id])
-    postsIDs    String[]  @map("_posts") @db.ObjectId
-    problems    Problem[] @relation(fields: [problemsIDs], references: [id])
-    problemsIDs String[]  @map("_problems") @db.ObjectId
+    id   String @id @default(auto()) @map("_id") @db.ObjectId
+    name String
 }
 
 model Post {
-    id            String     @id @default(cuid()) @map("_id") @db.ObjectId
-    title         String
-    content       Json?
-    published     Boolean    @default(false)
-    createdAt     DateTime   @default(now()) @map(name: "created_at")
-    updatedAt     DateTime   @default(now()) @map(name: "updated_at")
-    authorId      String
-    type          PostType   @default(POST)
-    categories    Category[] @relation(fields: [categoriesIDs], references: [id])
-    categoriesIDs String[]   @db.ObjectId
-
-    author User @relation(fields: [authorId], references: [id])
-
-    @@map(name: "posts")
+    id         String   @id @default(auto()) @map("_id") @db.ObjectId
+    title      String
+    content    String
+    published  Boolean  @default(false)
+    createdAt  DateTime @default(now()) @map(name: "created_at")
+    updatedAt  DateTime @default(now()) @map(name: "updated_at")
+    authorId   String
+    type       PostType @default(POST)
+    categories String[]
 }
 
 model Problem {
-    id            String     @id @default(auto()) @map("_id") @db.ObjectId
-    link          String
-    categories    Category[] @relation(fields: [categoriesIDs], references: [id])
-    categoriesIDs String[]   @db.ObjectId
+    id         String   @id @default(cuid()) @map("_id") @db.ObjectId
+    link       String
+    categories String[]
 }
 
 model Image {
-    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    id        String   @id @default(cuid()) @map("_id") @db.ObjectId
     name      String   @unique
     bytes     Bytes
     createdAt DateTime @default(now())

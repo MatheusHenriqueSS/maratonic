@@ -2,7 +2,7 @@ import usersRepository, { UserUpdateData } from "../repositories/users";
 import { Controller, CRUD } from "./controller";
 import { User } from "@prisma/client";
 
-class UsersController extends Controller {
+export default class UsersController extends Controller {
   public createCRUD(): CRUD {
     return new UsersCRUD();
   }
@@ -24,7 +24,3 @@ class UsersCRUD implements CRUD {
     await usersRepository.deleteById(id);
   };
 }
-
-const usersController = new UsersController();
-
-export default usersController;
