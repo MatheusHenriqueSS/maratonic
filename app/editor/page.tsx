@@ -76,7 +76,7 @@ function HomePage() {
       method: "POST",
       body: JSON.stringify({
         title: title,
-        content: formattedContent,
+        content: value,
         categories: selectedCategories.map((item) => item.label),
         authorId: "649cda21dcec376834a0e692",
       }),
