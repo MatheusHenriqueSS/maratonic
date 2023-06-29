@@ -45,5 +45,5 @@ export default withAuth(
 
 //default endpoint?
 export const config = {
-    matcher: ["/login", "/register"],
+    matcher: ["/login", "/register", "/profile"],
 };
