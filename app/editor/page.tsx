@@ -6,6 +6,7 @@ import '@uiw/react-markdown-editor/markdown-editor.css';
 import '@uiw/react-markdown-preview/markdown.css';
 import { toast } from 'react-toastify';
 import { MultiSelect } from "react-multi-select-component";
+import TextareaAutosize from "react-textarea-autosize";
 
 const DynamicMarkdownEditor = dynamic(() => import('@uiw/react-markdown-editor'), {
   ssr: false,
@@ -28,7 +29,7 @@ function HomePage() {
         const response = await fetch('/api/categories');
         if (response.ok) {
           const data = await response.json();
-          setCategories(data.map((item) => {
+          setCategories(data.map((item: any) => {
             return {label: item.name, value: item.id}
           }));
         } else {
@@ -104,27 +105,30 @@ function HomePage() {
 
   return (
     <div>
-      <input
-        type="text"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        placeholder="Enter title"
-      />
-    <MultiSelect
+    <TextareaAutosize
+    style={{color: "white"}}
+            autoFocus
+            id="title"
+            defaultValue="Untitled Post"
+            placeholder="Post title"
+            className="w-full resize-none appearance-none overflow-hidden bg-transparent text-3xl font-bold focus:outline-none"
+            onChange={(e: any) => setTitle(e.target.value)}
+    />
+    <div style={{maxWidth: "50%"}}><MultiSelect
         options={categories}
         value={selectedCategories}
         onChange={setSelectedCategories}
         labelledBy="Select"
-      />
+      /></div>
 
     {/* <div className="container mx-auto mt-20">
         <MultiSelect value={selectedCategories} onChange={(e) => setSelectedCategories(e.value)} options={categories} optionLabel="name" display="chip" 
             placeholder="Select Categories" maxSelectedLabels={3} className="lg:w-1/2 w-full" />
     </div> */}
 
-      <DynamicMarkdownEditor value={value} onChange={setValue} />
+      <DynamicMarkdownEditor hideToolbar={true} style={{minHeight: "500px"}} value={value} onChange={setValue} />
 
-      <button onClick={handleCreatePost}>Create Post</button>
+      <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" onClick={handleCreatePost}>Create Post</button>
     </div>
   );
 }
