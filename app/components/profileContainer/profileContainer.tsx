@@ -47,8 +47,10 @@ const ProfileContainer: React.FC<{}> = () => {
   const { data: session } = useSession();
   const [user, setUser] = useState<User>();
   const [userName, setUserName] = useState<string>("");
-  const [numberUserProblemsSolved, setNumberUserProblemsSolved] = useState<number>(0);
-  const [numberUserProblemsTried, setNumberUserProblemsTried] = useState<number>(0);
+  const [numberUserProblemsSolved, setNumberUserProblemsSolved] =
+    useState<number>(0);
+  const [numberUserProblemsTried, setNumberUserProblemsTried] =
+    useState<number>(0);
   const [rank, setRank] = useState<string>("");
 
   if (!session) {
@@ -56,7 +58,7 @@ const ProfileContainer: React.FC<{}> = () => {
       <div className={styles.profileContainer}>
         <p>Carregando...</p>
       </div>
-    )
+    );
   }
 
   if (!user) {
@@ -116,8 +118,14 @@ const ProfileContainer: React.FC<{}> = () => {
       </div>
 
       <div className={styles.doubleItemContainer}>
-        <DataContainer dataName="Problemas Resolvidos" dataInfo={numberUserProblemsSolved.toString()} />
-        <DataContainer dataName="Problemas Tentados" dataInfo={numberUserProblemsTried.toString()} />
+        <DataContainer
+          dataName="Problemas Resolvidos"
+          dataInfo={numberUserProblemsSolved.toString()}
+        />
+        <DataContainer
+          dataName="Problemas Tentados"
+          dataInfo={numberUserProblemsTried.toString()}
+        />
       </div>
 
       <div className={styles.doubleItemContainer}>

@@ -8,22 +8,23 @@ import SearchBar from "../components/SearchProblem/SearchBar";
 export default async function Home() {
   const [classes, setClasses] = useState<Problem[]>();
 
-  if(!classes){
+  if (!classes) {
     useEffect(() => {
       fetch("api/posts", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-        }
-      }).then((response) => response.json())
-      .then((posts) => (setClasses(posts)));
-    })
+        },
+      })
+        .then((response) => response.json())
+        .then((posts) => setClasses(posts));
+    });
   }
   return (
     <main>
       <Nav />
       <SearchBar />
-      <SearchProblem classes={classes}/>
+      <SearchProblem classes={classes} />
     </main>
   );
 }

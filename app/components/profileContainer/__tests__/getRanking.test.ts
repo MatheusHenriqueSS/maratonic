@@ -113,9 +113,9 @@ describe("getRanking function tests", () => {
     const ranking = getRanking(999);
     expect(ranking).toBe("master");
   });
-  
+
   test("upper limit + 1", () => {
     const ranking = getRanking(1000);
     expect(ranking).toBe("grand master");
-  })
+  });
 });

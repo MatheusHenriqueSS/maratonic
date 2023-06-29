@@ -11,7 +11,7 @@ async function create(name: string, link: string, categories: string[]) {
     data: {
       name: name,
       link: link,
-      categories: categories
+      categories: categories,
     },
   });
   return problem;

@@ -80,9 +80,7 @@ const SearchProblemPage: React.FC<{}> = () => {
                 <h1> {prob.name} </h1>
               </div>
               <div className={cardStyles.conteiner}>
-                <p>
-                  Categorias: {prob.categories.toString()}
-                </p>
+                <p>Categorias: {prob.categories.toString()}</p>
               </div>
             </div>
           </a>

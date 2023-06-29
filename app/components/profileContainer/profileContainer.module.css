@@ -29,7 +29,7 @@
 }
 
 .itemContainer {
-  float:inline-start;
+  float: inline-start;
   text-align: center;
   width: 50%;
   display: inline-flex;
