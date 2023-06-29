@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import { User } from "@prisma/client";
 import { UserRole } from "@prisma/client";
 import { signOut } from "next-auth/react";
+import * as RankingUtils from "./getRanking";
 
 const ProfilePictureContainer: React.FC<{ imagePath: StaticImageData }> = ({
   imagePath,
@@ -32,35 +33,20 @@ const DataContainer: React.FC<{ dataName: string; dataInfo: string }> = ({
       {" "}
       <span
         className="font-bold"
-        style={{ marginLeft: "10px", marginRight: "10px" }}
+        style={{ marginLeft: "10px", marginRight: "10px", maxHeight: "10px" }}
       >
         {dataName}:
       </span>
-      <div
-        style={{
-          border: "2px solid black",
-          height: "35px",
-          width: "auto",
-          textAlign: "left",
-          paddingLeft: "10px",
-          paddingRight: "10px",
-          overflow: "hidden",
-          borderRadius: "10px",
-          marginRight: "auto",
-        }}
-      >
-        {" "}
-        {dataInfo}{" "}
-      </div>
+      <div className={styles.itemText}> {dataInfo} </div>
     </h3>
   );
 };
 
 const ProfileContainer: React.FC<{}> = () => {
-  const { data: session, update } = useSession();
+  const { data: session } = useSession();
   const [user, setUser] = useState<User>();
   const [userName, setUserName] = useState<string>("");
-  const [rankColor, setRankColor] = useState<string>("");
+  const [rank, setRank] = useState<string>("");
 
   if (!user) {
     fetch("api/users", {
@@ -75,9 +61,14 @@ const ProfileContainer: React.FC<{}> = () => {
       )
       .then((user) => {
         setUser(user);
-        if (user) setUserName(user.name ? user.name : "");
+
+        if (!user) return;
+
+        setUserName(user.name ? user.name : "Sem nome ainda😔");
+        setRank(RankingUtils.getRanking(78));
+        console.log(rank);
       })
-      .catch((error) => console.error(error));
+      .catch(() => console.log("user not found"));
 
     return (
       <div className={styles.profileContainer}>
@@ -88,6 +79,7 @@ const ProfileContainer: React.FC<{}> = () => {
   return (
     <div className={styles.profileContainer}>
       <ProfilePictureContainer imagePath={profileIcon} />
+
       <div className={styles.doubleItemContainer}>
         <h3 className={styles.itemContainer}>
           {" "}
@@ -110,11 +102,42 @@ const ProfileContainer: React.FC<{}> = () => {
           }
         />
       </div>
+
       <div className={styles.doubleItemContainer}>
         <DataContainer dataName="Problemas Resolvidos" dataInfo={"78"} />
         <DataContainer dataName="Problemas Tentados" dataInfo={"90"} />
       </div>
-      <div>Ranking vai aqui</div>
+
+      <div className={styles.doubleItemContainer}>
+        <h2
+          className={styles.itemContainer}
+          style={{
+            height: "45px",
+            textAlign: "center",
+            display: "inline-flex",
+            justifyContent: "center",
+          }}
+        >
+          <span
+            className="font-bold"
+            style={{ marginLeft: "10px", marginRight: "10px" }}
+          >
+            Ranking:
+          </span>{" "}
+          <div
+            className={styles.itemText}
+            style={{
+              border: "2px solid",
+              height: "50px",
+              color: RankingUtils.getRankingHexColor(rank),
+            }}
+          >
+            {RankingUtils.getRankingName(rank)}
+            <Image src={""} alt="Rank" />
+          </div>
+        </h2>
+      </div>
+
       <div
         className={styles.itemContainer}
         style={{
@@ -146,6 +169,7 @@ const ProfileContainer: React.FC<{}> = () => {
         >
           Alterar nome
         </button>
+
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-5 px-10"
           style={{
@@ -155,7 +179,9 @@ const ProfileContainer: React.FC<{}> = () => {
             marginRight: "auto",
             marginLeft: "auto",
           }}
-          onClick={() => signOut()}
+          onClick={() => {
+            signOut();
+          }}
         >
           Logout
         </button>

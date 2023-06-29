@@ -30,16 +30,13 @@
 }
 
 .itemContainer {
-  /* background-color: var(--nav-background); */
-  float: inline-start;
+  float:inline-start;
   text-align: center;
   width: 50%;
-  margin-top: auto;
-  margin-bottom: auto;
   display: inline-flex;
   height: 30px;
-  padding-top: 20px;
-  padding-bottom: 30px;
+  margin-top: 20px;
+  margin-bottom: 30px;
 }
 
 .textArea {
@@ -51,9 +48,8 @@
   border: none;
   width: fit-content;
   overflow-y: hidden;
-  max-height: 35px;
+  max-height: 40px;
   max-width: 50%;
-
 
   /* Removes border effects */
   outline: none;
@@ -63,4 +59,16 @@
 
   border: 2px solid red;
   border-radius: 10px;
+}
+
+.itemText {
+  border: 2px solid black;
+  height: 40px;
+  width: auto;
+  text-align: left;
+  padding-left: 10px;
+  padding-right: 10px;
+  overflow: hidden;
+  border-radius: 10px;
+  margin-right: auto;
 }
