@@ -8,7 +8,6 @@ export default async function ClassesPage() {
   return (
     <main>
       <Nav />
-      <SearchBar />
       <SearchPostPage />
     </main>
   );
