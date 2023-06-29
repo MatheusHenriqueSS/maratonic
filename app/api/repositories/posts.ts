@@ -11,14 +11,14 @@ async function create(
     authorId: string,
     title: string,
     content: string,
-    categoriesIDs: string[]
+    categories: string[]
 ) {
     const post = await prisma.post.create({
         data: {
             authorId: authorId,
             title: title,
             content: content,
-            categories: categoriesIDs,
+            categories: categories,
         },
     });
 
