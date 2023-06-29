@@ -21,7 +21,7 @@ const SearchPostPage: React.FC<{}> = () => {
         setFilteredClasses(posts);
         console.log(
           "categories",
-          posts.map((p) => p?.categories)
+          posts.map((p: Post) => p?.categories)
         );
       })
       .catch((error) => console.log("a"));
