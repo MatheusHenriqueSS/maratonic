@@ -86,14 +86,16 @@ const Nav: React.FC<{}> = () => {
   }
 
   return (
-    <nav className={styles.navbar}>
-      <NavLogo />
-      <NavLinks links={leftLinks} />
-      <NavLinks
-        links={session ? authenticatedRightLinks : unauthenticatedRightLinks}
-        position="right"
-      />
-    </nav>
+    <div style={{ display: "block" }}>
+      <nav className={styles.navbar}>
+        <NavLogo />
+        <NavLinks links={leftLinks} />
+        <NavLinks
+          links={session ? authenticatedRightLinks : unauthenticatedRightLinks}
+          position="right"
+        />
+      </nav>
+    </div>
   );
 };
 
