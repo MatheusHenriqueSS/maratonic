@@ -52,9 +52,11 @@ const ProfileContainer: React.FC<{}> = () => {
   const [rank, setRank] = useState<string>("");
 
   if (!session) {
+    return (
       <div className={styles.profileContainer}>
         <p>Carregando...</p>
       </div>
+    )
   }
 
   if (!user) {
@@ -77,7 +79,6 @@ const ProfileContainer: React.FC<{}> = () => {
         setNumberUserProblemsSolved(user.problemsSolvedIds.length);
         setNumberUserProblemsTried(user.problemsTriedIds.length);
         setRank(RankingUtils.getRanking(user.problemsSolvedIds.length));
-        console.log(rank);
       })
       .catch(() => console.log("user not found"));
 
