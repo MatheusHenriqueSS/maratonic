@@ -1,10 +1,9 @@
 import prisma from "../client";
 
 export interface UserUpdateData {
-  nickname?: string;
-  email?: string;
-  passwordHash?: string;
-  salt?: string;
+  name?: string;
+  problemsSolvedIds?: String[];
+  problemsTriedIds?: String[];
 }
 
 async function list() {

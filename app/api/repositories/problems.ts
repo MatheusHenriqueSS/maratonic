@@ -1,6 +1,7 @@
 import prisma from "../client";
 
 export interface ProblemUpdateData {
+  name?: string;
   link?: string;
   categoriesIDs: string[];
 }
