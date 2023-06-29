@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import { User } from "@prisma/client";
 import { UserRole } from "@prisma/client";
 import { signOut } from "next-auth/react";
+import { toast } from "react-toastify";
 import * as RankingUtils from "./getRanking";
 
 const ProfilePictureContainer: React.FC<{ imagePath: StaticImageData }> = ({
@@ -173,6 +174,16 @@ const ProfileContainer: React.FC<{}> = () => {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({ name: userName }),
+            });
+            toast.success("Nome alterado com sucesso!", {
+              position: "bottom-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
             });
             console.log(newUser);
           }}
