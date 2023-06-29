@@ -22,7 +22,7 @@
 }
 
 .doubleItemContainer {
-  margin-top:30px;
+  margin-top: 30px;
   width: calc(100% - 20px);
   margin-left: 10px;
   height: fit-content;
@@ -31,9 +31,36 @@
 
 .itemContainer {
   /* background-color: var(--nav-background); */
-  float:inline-start;
+  float: inline-start;
   text-align: center;
   width: 50%;
   margin-top: auto;
   margin-bottom: auto;
+  display: inline-flex;
+  height: 30px;
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+
+.textArea {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: auto;
+  font-size: 26px;
+  resize: none;
+  border: none;
+  width: fit-content;
+  overflow-y: hidden;
+  max-height: 35px;
+  max-width: 50%;
+
+
+  /* Removes border effects */
+  outline: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+
+  border: 2px solid red;
+  border-radius: 10px;
 }
