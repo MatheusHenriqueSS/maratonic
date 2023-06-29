@@ -109,9 +109,11 @@ const ProfileContainer: React.FC<{}> = () => {
       </div>
 
       <div className={styles.doubleItemContainer}>
-        <h2
+        <div
           className={styles.itemContainer}
           style={{
+            fontSize: "34px",
+            width: "fit-content",
             height: "45px",
             textAlign: "center",
             display: "inline-flex",
@@ -124,18 +126,26 @@ const ProfileContainer: React.FC<{}> = () => {
           >
             Ranking:
           </span>{" "}
-          <div
-            className={styles.itemText}
-            style={{
-              border: "2px solid",
-              height: "50px",
-              color: RankingUtils.getRankingHexColor(rank),
-            }}
-          >
-            {RankingUtils.getRankingName(rank)}
-            <Image src={""} alt="Rank" />
+          <div className="flex items-center">
+            <div
+              className={styles.itemText}
+              style={{
+                border: "2px solid",
+                height: "50px",
+                color: RankingUtils.getRankingHexColor(rank),
+              }}
+            >
+              {RankingUtils.getRankingName(rank)}
+            </div>
+            <div>
+              <Image
+                src={RankingUtils.getRankingIcon(rank)}
+                alt="Rank"
+                width={40}
+              />
+            </div>
           </div>
-        </h2>
+        </div>
       </div>
 
       <div

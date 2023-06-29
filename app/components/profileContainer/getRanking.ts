@@ -1,3 +1,14 @@
+import blackIcon from "./rankingIcons/preto.png";
+import bronzeIcon from "./rankingIcons/marrom.png";
+import silverIcon from "./rankingIcons/prata.png";
+import goldIcon from "./rankingIcons/ouro.png";
+import platinumIcon from "./rankingIcons/platina.png";
+import diamondIcon from "./rankingIcons/diamante.png";
+import masterIcon from "./rankingIcons/mestre.png";
+import grandMasterIcon from "./rankingIcons/grao_mestre.png";
+
+import { StaticImageData } from "next/image";
+
 const rankings = [
   "bronze",
   "silver",
@@ -63,6 +74,22 @@ export function getRankingName(ranking: string): string {
   if (ranking === "diamond") return "Avançado";
   if (ranking === "master") return "Avançado++";
   if (ranking === "grand master") return "Lenda";
+
+  return "";
+}
+
+export function getRankingIcon(ranking: string): StaticImageData | string {
+  let Icon;
+  if (ranking === "black") Icon = blackIcon;
+  if (ranking === "bronze") Icon = bronzeIcon;
+  if (ranking === "silver") Icon = silverIcon;
+  if (ranking === "gold") Icon = goldIcon;
+  if (ranking === "platinum") Icon = platinumIcon;
+  if (ranking === "diamond") Icon = diamondIcon;
+  if (ranking === "master") Icon = masterIcon;
+  if (ranking === "grand master") Icon = grandMasterIcon;
+
+  if (Icon) return Icon;
 
   return "";
 }
