@@ -51,6 +51,12 @@ const ProfileContainer: React.FC<{}> = () => {
   const [numberUserProblemsTried, setNumberUserProblemsTried] = useState<number>(0);
   const [rank, setRank] = useState<string>("");
 
+  if (!session) {
+      <div className={styles.profileContainer}>
+        <p>Carregando...</p>
+      </div>
+  }
+
   if (!user) {
     fetch("api/users", {
       method: "GET",
