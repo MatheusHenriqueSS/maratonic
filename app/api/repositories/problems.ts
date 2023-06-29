@@ -6,10 +6,12 @@ export interface ProblemUpdateData {
   categoriesIDs: string[];
 }
 
-async function create(link: string, categoriesIDs: string[]) {
+async function create(name: string, link: string, categories: string[]) {
   const problem = await prisma.problem.create({
     data: {
+      name: name,
       link: link,
+      categories: categories
     },
   });
   return problem;

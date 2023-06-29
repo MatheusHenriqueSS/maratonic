@@ -12,7 +12,7 @@ export default class ProblemsController extends Controller {
 
 class ProblemsCRUD implements CRUD {
   public create = async (body: any): Promise<Problem> => {
-    return await problemsRepository.create(body.link, body.categoriesIDs);
+    return await problemsRepository.create(body.name, body.link, body.categories);
   };
 
   public getAll = async (): Promise<Problem[]> => {
