@@ -8,97 +8,97 @@ import plusIcon from "./icons/plus.svg";
 import brushIcon from "./icons/brush.svg";
 
 export type NavLink = {
-    label?: string;
-    href: string;
-    icon: string;
+  label?: string;
+  href: string;
+  icon: string;
 };
 
 const landingPageLink = {
-    label: "Início",
-    href: "/",
-    icon: houseIcon,
+  label: "Início",
+  href: "/",
+  icon: houseIcon,
 };
 
 const classesLink = {
-    label: "Aulas",
-    href: "/classes",
-    icon: bookIcon,
+  label: "Aulas",
+  href: "/classes",
+  icon: bookIcon,
 };
 
 const problemsLink = {
-    label: "Problemas",
-    href: "/problems",
-    icon: balloonIcon,
+  label: "Problemas",
+  href: "/problems",
+  icon: balloonIcon,
 };
 
 const standingsLink = {
-    label: "Placar",
-    href: "/standings",
-    icon: trophyIcon,
+  label: "Placar",
+  href: "/standings",
+  icon: trophyIcon,
 };
 
 const createClassLink = {
-    label: "Nova aula",
-    href: "/editor",
-    icon: brushIcon,
+  label: "Nova aula",
+  href: "/editor",
+  icon: brushIcon,
 };
 
 const addProblemLink = {
-    label: "Novo problema",
-    href: "/create/problem",
-    icon: plusIcon,
+  label: "Novo problema",
+  href: "/create/problem",
+  icon: plusIcon,
 };
 
 const unauthenticatedLeftLinksData = {
-    links: [landingPageLink],
+  links: [landingPageLink],
 };
 
 const studentsLeftLinksData = {
-    links: [landingPageLink, classesLink, problemsLink, standingsLink],
+  links: [landingPageLink, classesLink, problemsLink, standingsLink],
 };
 
 const teachersLeftLinksData = {
-    links: [
-        landingPageLink,
-        classesLink,
-        problemsLink,
-        standingsLink,
-        createClassLink,
-        addProblemLink,
-    ],
+  links: [
+    landingPageLink,
+    classesLink,
+    problemsLink,
+    standingsLink,
+    createClassLink,
+    addProblemLink,
+  ],
 };
 
 const unauthenticatedRightLinksData = {
-    links: [
-        {
-            label: "Login",
-            href: "/login",
-            icon: incognitoIcon,
-        },
-    ],
+  links: [
+    {
+      label: "Login",
+      href: "/login",
+      icon: incognitoIcon,
+    },
+  ],
 };
 
 const authenticatedRightLinksData = {
-    links: [
-        {
-            href: "/profile",
-            icon: userIcon,
-        },
-    ],
+  links: [
+    {
+      href: "/profile",
+      icon: userIcon,
+    },
+  ],
 };
 
 export const unauthenticatedLeftLinks = JSON.parse(
-    JSON.stringify(unauthenticatedLeftLinksData)
+  JSON.stringify(unauthenticatedLeftLinksData)
 ).links;
 export const studentsLeftLinks = JSON.parse(
-    JSON.stringify(studentsLeftLinksData)
+  JSON.stringify(studentsLeftLinksData)
 ).links;
 export const teachersLeftLinks = JSON.parse(
-    JSON.stringify(teachersLeftLinksData)
+  JSON.stringify(teachersLeftLinksData)
 ).links;
 export const unauthenticatedRightLinks = JSON.parse(
-    JSON.stringify(unauthenticatedRightLinksData)
+  JSON.stringify(unauthenticatedRightLinksData)
 ).links;
 export const authenticatedRightLinks = JSON.parse(
-    JSON.stringify(authenticatedRightLinksData)
+  JSON.stringify(authenticatedRightLinksData)
 ).links;
