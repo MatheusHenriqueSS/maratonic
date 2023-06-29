@@ -1,0 +1,39 @@
+.profileContainer {
+  position: absolute;
+  display: flexbox;
+  text-align: justify;
+  border-radius: 10px;
+  margin-top: 125px; /* navbar (75px) + padding (25px) */
+  padding: 10px;
+  left: 15px;
+  width: calc(100% - 30px);
+  height: calc(
+    100% - 150px
+  ); /* navbar (75px) + top padding (25px) + bottom padding (25px) */
+  background: var(--white-background);
+}
+
+.imageContainer {
+  display: grid;
+  justify-content: center;
+  width: 100%;
+  height: fit-content;
+  padding: 10px;
+}
+
+.doubleItemContainer {
+  margin-top:30px;
+  width: calc(100% - 20px);
+  margin-left: 10px;
+  height: fit-content;
+  background-color: red;
+}
+
+.itemContainer {
+  /* background-color: var(--nav-background); */
+  float:inline-start;
+  text-align: center;
+  width: 50%;
+  margin-top: auto;
+  margin-bottom: auto;
+}
