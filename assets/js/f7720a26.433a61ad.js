@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmaratonic=self.webpackChunkmaratonic||[]).push([[276],{7333:a=>{a.exports=JSON.parse('{"categoryGeneratedIndex":{"title":"Maratona Interna","slug":"/category/maratona-interna","permalink":"/docs/category/maratona-interna","sidebar":"tutorialSidebar","navigation":{"next":{"title":"2024","permalink":"/docs/maratona-interna/2024"}}}}')}}]);
