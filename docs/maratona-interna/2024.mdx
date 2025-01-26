@@ -1,0 +1,118 @@
+---
+sidebar_position: 4
+title: 2024
+description: Editorial da Maratona Interna de 2024
+slug: 2024
+---
+import ProblemTracker from '@site/src/components/ProblemTracker';
+
+# Maratona Interna - 2024
+
+Você pode achar o contest no CodeForces [aqui](https://codeforces.com/group/qvHyJ30eac/contest/541974).
+
+<ProblemTracker
+  problems={[
+    {
+      name: 'A. Cubo mágico da Showpee',
+      link: 'https://codeforces.com/group/qvHyJ30eac/contest/541974/problem/A',
+    },
+    {
+      name: 'B. Quadrados consecutivos',
+      link: 'https://codeforces.com/group/qvHyJ30eac/contest/541974/problem/B',
+    },
+    {
+      name: 'C. Algoritmo de Euclides',
+      link: 'https://codeforces.com/group/qvHyJ30eac/contest/541974/problem/C',
+    },
+    {
+      name: 'D. Manipulando dados',
+      link: 'https://codeforces.com/group/qvHyJ30eac/contest/541974/problem/D'
+    }
+  ]}
+/>
+
+# Editorial
+
+
+### A. Cubo mágico da Showpee
+
+Primeiramente, note que é possível arranjar os elementos da matriz como você quiser: coloque o elemento
+que você quiser na posição $$(0, 0)$$, depois outro na posição $$(0, 1)$$, depois na posição $$(0, 2)$$, e assim por
+diante até a posição $$(n, m)$$. 
+
+Já que posso arranjar os elementos como quiser, basta analisar se o conjunto
+dos números da primeira matriz é igual ao conjunto da segunda matriz. Para fazer isso, coloque todos os
+elementos da primeira matriz num array e ordene-o. Faça a mesma coisa para a segunda matriz e compare
+se os dois arrays são iguais.
+
+
+### B. Quadrados Consecutivos
+
+Abrindo a conta temos que $$(n + 1)^2 − n^2 = 2 \times n + 1$$. Como $$n$$ pode ser muito grande, precisamos tratar o
+número como uma string e fazer a conta "na mão", ou seja, simular o algoritmo de soma comum dígito por
+dígito. Para fazer isso mantemos uma variável `carry` inicialmente igual a $$1$$ e iteramos os dígitos de menor
+para maior: $$resposta[i] = 2 ∗numero[i] +carry (mod10)$$. Se $$numero[i] ∗ 2 +carry ≥ 10$$, $$carry = 1$$, senão
+$$carry = 0$$.
+
+### D. Manipulando Dados
+Relembrando, queremos calcular o intervalo de tamanho $$k$$ que minimiza a seguinte expressão 
+$$
+\sigma = \sqrt{\frac{1}{k}\times\sum_{i = l}^{r}(X_i - M)^2}
+$$
+
+O principal desafio desse problema é achar uma forma de calcular as informações necessárias para achar
+o intervalo de menor desvio padrão sem precisar usar aritmética de ponto flutuante (como o `double` no
+C++). Para isso, vamos manipular a fórmula do desvio padrão de forma que ainda possamos comparar
+dois intervalos mas que o resultado seja inteiro.
+
+Onde:
+$$
+M = \frac{\sum_{l \leq i < r}X_i}{k}
+$$
+
+Para isso, seja: 
+$$
+S = \sum_{l \leq i \leq r}X_i
+$$
+$$
+S_2 = \sum_{l \leq i \leq r}X_i^2
+$$
+
+Temos então que: 
+$$
+M = \frac{S}{k}
+$$
+
+E: 
+$$
+\sigma = \sqrt{\frac{1}{k}\times\sum_{i = l}^{r}(X_i - \frac{S}{k})^2}
+$$
+$$
+ = \sqrt{\frac{1}{k}\times(S_2 - 2 \times \frac{S^2}{k} + k \times \frac{S^2}{k^2})}
+$$
+$$
+ = \sqrt{\frac{1}{k}\times(S_2 - \frac{S^2}{k})}
+$$
+$$
+\leftrightarrow \sigma = \sqrt{\frac{1}{k^2} \times (S_2k - S^2)}
+$$
+
+Portanto, se queremos saber se um intervalo de soma $$S$$ e soma dos quadrados $$S2$$ tem menor desvio padrão
+que um intervalo de soma $$S'$$ e soma dos quadrados $$S'_2$$, poderemos fazer o calculo apenas usando valores
+inteiros! O motivo é que: 
+$$
+\sqrt{\frac{1}{k^2} \times (S_2k - S^2)} < \sqrt{\frac{1}{k^2} \times (S'_2k - S'^2)}
+$$
+$$
+\leftrightarrow \frac{1}{k^2} \times (S_2k - S^2) < \frac{1}{k^2} \times (S'_2k - S'^2)
+$$
+$$
+\leftrightarrow  (S_2k - S^2) < \ (S'_2k - S'^2)
+$$
+
+Sendo assim, podemos manter $$S$$ e $$S2$$ com uma soma de prefixo ou com sliding window e comparar os
+intervalos a partir dessa expressão apenas utilizando valores inteiros. Depois de tudo isso, teremos que
+calcular qual é o desvio padrão de fato, mas como o problema permite um pequeno erro no cálculo do
+valor quebrado, não teremos problema quanto a isso.
+
+Complexidade: $$O(n)$$
