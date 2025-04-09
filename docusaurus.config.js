@@ -14,7 +14,7 @@ import rehypeKatex from 'rehype-katex';
 const config = {
   title: 'MaratonIC',
   tagline: 'Dinosaurs are cool',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/sonic.ico',
 
   // Set the production url of your site here
   url: 'https://your-docusaurus-site.example.com',
