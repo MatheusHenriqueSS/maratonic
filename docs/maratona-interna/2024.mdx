@@ -116,3 +116,200 @@ calcular qual é o desvio padrão de fato, mas como o problema permite um pequen
 valor quebrado, não teremos problema quanto a isso.
 
 Complexidade: $$O(n)$$
+
+## Problem D. Manipulando dados
+
+Relembrando, queremos calcular o intervalo de tamanho k que minimiza a seguinte express˜o: a
+
+<!-- formula-not-decoded -->
+
+O principal desafio desse problema ´ achar uma forma de calcular as informa¸ c˜es necess´rias para achar e o a o intervalo de menor desvio padr˜o sem precisar usar aritm´tica de ponto flutuante (como o double no a e C++). Para isso, vamos manipular a f´rmula do desvio padr˜o de forma que ainda possamos comparar o a dois intervalos mas que o resultado seja inteiro.
+
+Onde:
+
+<!-- formula-not-decoded -->
+
+<!-- formula-not-decoded -->
+
+<!-- formula-not-decoded -->
+
+<!-- formula-not-decoded -->
+
+<!-- formula-not-decoded -->
+
+<!-- formula-not-decoded -->
+
+<!-- formula-not-decoded -->
+
+Para isso, seja:
+
+Temos ent˜ ao que:
+
+E:
+
+<!-- formula-not-decoded -->
+
+<!-- formula-not-decoded -->
+
+Portanto, se queremos saber se um intervalo de soma S e soma dos quadrados S 2 tem menor desvio padr˜o a que um intervalo de soma S ′ e soma dos quadrados S ′ 2 , poderemos fazer o calculo apenas usando valores inteiros! O motivo ´ que: e
+
+<!-- formula-not-decoded -->
+
+<!-- formula-not-decoded -->
+
+<!-- formula-not-decoded -->
+
+Sendo assim, podemos manter S e S 2 com uma soma de prefixo ou com sliding window e comparar os intervalos a partir dessa express˜o apenas utilizando valores inteiros. Depois de tudo isso, teremos que a calcular qual ´ o desvio padr˜o de fato, mas como o problema permite um pequeno erro no c´lculo do e a a valor quebrado, n˜o teremos problema quanto a isso. a
+
+Complexidade: O n ( )
+
+## Problem E. Equa¸ c˜o do Show Perfeito a
+
+Resumindo, nosso objetivo ´ encontrar uma solu¸ c˜o e a ( x , x 1 2 , . . . , x n ) inteira para
+
+<!-- formula-not-decoded -->
+
+Essa equa¸ c˜o ´ uma diofantina linear, neste link: a e
+
+## https://cp-algorithms.com/algebra/linear-diophantine-equation.html .
+
+H´ a mais detalhes em como resolver o caso no qual n = 2 , mas, resumindo, para duas vari´veis, existe a solu¸˜o se, e somente se, ca mdc a , a ( 1 2 ) divide k , e h´ duas formas principais de achar uma solu¸ c˜o, uma a a utilizando o algoritmo de Euclides e outra calculando congruˆncias e inversos modulares. e
+
+Voltando para o problema, nosso objetivo ´ estender essa solu¸˜o para e ca n geral. n = 1 ´ e f´cil de resolver e a n = 2 ´ e o que j´ sabemos, ent˜o resolveremos para a a n = 3 e generalizaremos o processo.
+
+Considere a diofantina
+
+<!-- formula-not-decoded -->
+
+Veja que mdc a , a , a ( 1 2 3 ) deve dividir k , pois caso contr´rio n˜o existiria solu¸˜o. a a ca
+
+Considere d = mdc a , a ( 1 2 ) . Vamos olhar para o termo a x 1 1 + a x 2 2 da equa¸ c˜o. Pelo que vimos sobre o a caso n = 2 , esse termo ´ sempre igual a um m´ltiplo de e u d , e todo m´ltiplo de u d pode ser escrito dessa forma, ent˜o podemos substituir tal termo por a dy, para uma nova vari´vel a y .
+
+Agora, voltando para nossa equa¸ c˜o, obtemos que ela ´ equivalente a a e
+
+<!-- formula-not-decoded -->
+
+e mdc a , a , a ( 1 2 3 ) | k = ⇒ mdc d, a ( 3 ) | k , ent˜o, conseguimos reaplicar o caso a n = 2 .
+
+Aplicando a mesma l´gica podemos generalizar a solu¸ c˜o. Se o a mdc a , a , . . . , a ( 1 2 n ) n˜ ao divide k , n˜ ao existe solu¸˜o. Vamos supor, ent˜o, que divide. Para encontrar ca a x n , tome d = mdc a , a , . . . , a ( 1 2 n -1 ) , e ache uma solu¸˜o ca ( y, x n ) para
+
+<!-- formula-not-decoded -->
+
+Assim, reduzimos o problema para achar solu¸ c˜o de a
+
+<!-- formula-not-decoded -->
+
+Agora, basta repetir o processo at´ chegar em e n = 2 . Ao fim, encontramos uma solu¸ c˜o a ( x , x 1 2 , . . . , x n ) .
+
+Dessa forma, conclu´ ımos o problema... mas h´ algo a mais para se preocupar. Embora essa solu¸˜o esteja a ca correta, ´ necess´rio ter cuidado com o tamanho da solu¸ c˜o encontrada. No geral, essa solu¸˜o pode ficar e a a ca grande demais para caber at´ mesmo em um long long. Uma poss´ ıvel solu¸ c˜o para esse problema ´ usar o e a e Python, ou trabalhar com grandes n´meros em C++. Uma outra poss´ ıvel solu¸ c˜o ´ tratar cada diofantina u a e para que n˜o tenha solu¸ c˜es grandes demais. a o
+
+Para encontrarmos todas as solu¸ c˜es de uma diofantina linear o ax + by = c , basta acharmos uma solu¸ c˜o a inicial qualquer ( x , y 0 0 ) , e assim, a forma geral das solu¸˜es ´ co e
+
+<!-- formula-not-decoded -->
+
+onde d = mdc a, b ( ) e α ∈ Z . Como fazemos uma diofantina de grau 2 para achar cada x i , basta minimizar seus valores absolutos em cada solu¸˜o. Por exemplo, na equa¸ c˜o anterior, para minimizar ca a x , basta fazer x = x 0 + α · b d pr´ximo de o 0 , ou seja, escolher
+
+<!-- formula-not-decoded -->
+
+onde [ z ] ´ e o inteiro mais pr´ximo de o z. Esse ajuste ´ suficiente para que todas as vari´veis fiquem dentro e a do limite do long long.
+
+## Problem F. Sol
+
+Chame a elipse dada de Ω . Sabemos que ela pode ser parametrizada como
+
+<!-- formula-not-decoded -->
+
+Dado um ponto P = ( a cos θ, b sen θ ) ∈ Ω , vamos calcular qual a porcentagem da ´rea total da elipse que a a regi˜o sombreada com ele forma. Vamos dividir essa ´rea com o triˆngulo a a a FPO e a regi˜o definida pelo a ˆngulo a ∠ POA , onde O ´ e o centro da elipse. Consideremos ´reas orientadas. a
+
+Veja que a altura de FPO relativa a FO ´ e b sen θ . Assim, a ´rea de a FPO ´ e facilmente calculada (metade de base vezes altura) como
+
+<!-- formula-not-decoded -->
+
+Para calcularmos a ´rea da outra regi˜o, consideremos a transforma¸ c˜o linear a a a T : R 2 → R 2 , que satisfaz
+
+<!-- formula-not-decoded -->
+
+Perceba que ela leva a elipse dada na circunferˆncia unit´ria (circunferˆncia centrada em e a e (0 0) , e possui raio 1 ).
+
+Defina A (Λ) como a ´rea de a Λ para qualquer curva fechada no plano.
+
+Como T ´ e uma transforma¸ c˜o linear, ´ sabido que a e A T ( (Λ)) = A (Λ) ab para toda curva Λ .
+
+Veja que a imagem da regi˜o desejada ´ simplesmente a uma se¸ c˜o circular de ˆngulo a e a a θ na circunferˆncia e unit´ria (cuja ´rea ´ a a e θ 2 ). Assim, temos que a ´rea da regi˜o procurada ´ a a e θ ab · 2 .
+
+Como a ´ area de Ω ´ e dada por ab · π , temos que a fra¸ c˜o da elipse que ´ coberta ´ dada por a e e
+
+<!-- formula-not-decoded -->
+
+Assim, ´ e poss´ ıvel fazer uma busca bin´ria em a θ para que se ache para qual valor a express˜o acima se a aproxima de p % glyph[squaresolid] .
+
+Nota: Se vocˆ n˜o est´ acostumado com ´reas orientadas, pode perceber que o ponto que gera a ´rea de e a a a a p % ´ e o reflexo do ponto que gera (100 -p )% pelo eixo x .
+
+## Problem G. Pulos perdidos
+
+Dada uma sequˆ encia p de n ( 1 ≤ n ≤ 51 ) inteiros, queremos construir uma sequˆncia e a de q ( n ≤ q ≤ 51 ) inteiros que satisfa¸a as seguintes condi¸˜es: c co
+
+- · a cont´m todos elementos de e p .
+- · o primeiro e o ´ltimo elemento de u a est˜o contidos em a p .
+- · a diferen¸a absoluta (tamanho do pulo) entre o c i -´simo e o e i +1 -´simo elementos (posi¸ c˜es do sapo) e o de a ´ e 2 i -1 , para todo 1 ≤ i &lt; q .
+
+Se n = 1 , n˜ ao h´ a pulos, portanto basta imprimir a sequˆncia original. Ent˜o, vamos resolver para e a n ≥ 2 .
+
+Primeiramente, podemos observar que os elementos em a devem ser distintos entre si. Isso porque cada pulo ´ uma potˆ encia de e 2 distinta, e podemos provar que 2 k &gt; ∑ k -1 i =0 2 i . Ent˜ ao, independente da dire¸˜o ca do pr´ximo pulo, n˜o ´ poss´ ıvel o sapo voltar para uma posi¸˜o anterior. Por exemplo, ainda que todos o a e ca pulos tenham sido para a direita e o pr´ximo seja para esquerda, este ser´ maior que a soma de todos o a outros e portanto a pr´xima posi¸ c˜o ficar´ ` esquerda da posi¸˜o inicial. o a a a ca
+
+Al´ em disso, como ´ e garantido que sempre existe uma resposta para os casos gerados e a sequˆncia da e entrada p deve estar contida em a , temos que os elementos de p tamb´ em sempre v˜o ser distintos. a
+
+Agora note que o primeiro elemento de a deve ser um elemento de p com paridade diferente de todos outros elementos em p . Isso se deve ao fato de que o primeiro pulo ´ o ´nico com paridade ´ ımpar, pois e u todos pulos s˜o potˆncias de a e 2 , e 1 ´ e a ´nica potˆncia de u e 2 ´ ımpar. Dessa forma, ao dar o primeiro pulo, a paridade da posi¸ c˜o do sapo muda, enquanto em todos outros pulos ela se mant´m. a e
+
+Com isso, para n ≥ 3 , o primeiro elemento de a pode ser unicamente determinado, sendo o ´nico elemento u com paridade diferente em p . J´ a para n = 2 , os dois elementos de p podem ser o primeiro de a , e podemos escolher qualquer um deles para tal.
+
+Assim, temos o primeiro elemento de a fixado, e vamos cham´ a-lo de s . Agora, podemos testar todas possibilidades de tamanho q ( n ≤ q ≤ 51 ) e de ´ltimo elemento da sequˆncia u e a . Vamos chamar de t o elemento que estamos testando para ser o ´ltimo elemento de u a . Cada elemento de p diferente de s ´ e um poss´ ıvel candidato para t .
+
+Podemos observar que ao fixar q , s e t , h´ a no m´ aximo uma forma de sair de s e chegar a t com q -1 pulos. Ela pode ser nossa resposta se, e somente se, ela contiver todos elementos de p . Ent˜ ao, para cada par ( q, t ) , podemos gerar essa sequˆncia e, se ela realmente for de e s a t e contiver todos elementos de p , podemos imprimi-la como a resposta e finalizar a procura.
+
+Agora veremos como gerar a sequˆ encia dados q , s e t . Vamos fazer o caminho ao contr´rio, saindo de a t e chegando a s , come¸ cando com pulo de tamanho 2 q -2 e dividindo o tamanho do pulo pela metade at´ chegar em e 1 . Usando novamente a observa¸ c˜o de que a 2 k &gt; ∑ k -1 i =0 2 i , agora podemos concluir que se t -s &gt; 0 , o maior pulo deve ser para a esquerda, e se s -t &lt; 0 , ele deve ser para a direita. Isso porque o maior pulo ´ maior que a soma de todos os outros, ent˜o se ele for para uma dire¸ c˜o que aumente a e a a
+
+distˆncia entre a s e a posi¸˜o atual, n˜o ser´ poss´ ıvel chegar a ca a a s com os pulos restantes. Ent˜o, s´ h´ chance a o a de construir a sequˆncia correta se o maior pulo diminuir a distˆncia entre e a s e a posi¸˜o atual. Isso resulta ca em um algoritmo recursivo, em que atualizamos t para a nova posi¸˜o ap´s o pulo e dividimos o tamanho ca o do pulo pela metade, enquanto ele for maior ou igual a 1 . No final, temos que reverter a sequˆncia, pois e fizemos o caminho ao contr´rio. a
+
+Dessa forma, ao fim do algoritmo de gerar a sequˆncia dados e q , s e t , temos todas posi¸ c˜es em ordem o da sequˆ encia candidata a a . Ent˜ ao s´ resta verificar se a sequˆncia come¸a mesmo em o e c s e cont´m todos e elementos de p . Para verificar se ela cont´m todos elementos de e p , pode-se armazenar em um set os elementos de p e para cada elemento da sequˆncia candidata ver se ele est´ no set ou n˜o. Se a quantidade e a a de elementos contidos no set for igual a n , ent˜o a sequˆncia candidata cont´m a e e p , e pode ser a nossa sequˆ encia a .
+
+Acomplexidade de tempo dessa solu¸ c˜o ´ a e O a ( | | 2 n log n ) , sendo | a | o tamanho da sequˆncia da resposta, que e no pior dos casos ´ e 51 . Mas vale lembrar que h´ a t casos de teste independentes, portanto a complexidade de tempo final dessa solu¸˜o considerando todos casos de teste ´ ca e O t a ( | | 2 n log n ) .
+
+´ E importante lembrar que os valores da sequˆncia e p v˜ ao de - · 2 10 18 a 2 · 10 18 , portanto em C e C++, por exemplo, n˜o ´ suficiente armazenar essas e outras vari´veis em inteiros de a e a 32 bits. Nesse caso, em C e C++, uma op¸ c˜o ´ usar o tipo a e long long int .
+
+## Problem H. ´ rvore de Strings A
+
+Para cada v´ ertice u , considere a string lexicograficamente maior s u ( ) que pode ser obtida pelo caminho de u pra algum v´ ertice k em sua sub-´rvore. Veja que a k ´ e folha, caso contr´rio, a poder´ ıamos descer a partir de k na ´rvore, adicionando assim caracteres no final de a s u ( ) , de modo que a obter uma string lexicograficamente maior, absurdo. Denote k por f ( u ) , para todo v´ ertice u da ´rvore. Vamos descobrir a f ( u ) para todo u num approach bottom-up atrav´ es de uma busca em profundiade come¸ cando na raiz.
+
+O grande lance aqui vai ser implementar uma fun¸ c˜o a bool compare int a, int b, int c, int d ( ) , que recebe quatro v´ ertices na ´rvore, sendo a a ancestral de b e c ancestral de d , e retorna um booleano, sendo esse verdadeiro se a string obtida pelo caminho de a at´ e b na ´rvore for lexicograficamente estritamente menor a que a string de b at´ e d , e falso caso contr´rio. Suponha que tal fun¸˜o est´ implementada por enquanto, e a ca a vejamos como resolver o problema com ela. Fala uma busca em profundidade come¸ cando em 1 . Seja v o v´ etice atual. Atribua f ( v ) ← v e itere pelos filhos u de v. Execute a busca em profundidade em u , depois, se compare v, f ( ( v , v, f ) ( u )) for verdadeiro, atribua f ( v ) ← f ( u ) . Esse algor´ ıtmo eficientemente acha f ( v ) para cada v´ ertice v em O nα ( ) , supondo que compare roda em O α ( ) . Podemos imprimir o tamanho do caminho de v at´ e f ( v ) para cada v´ ertice v , bastando pr´ e-calcular a profundidade de cada n´ na ´rvore o a (lembre que v ´ e ancestral de f ( v ) ). Por fim, para imprimir a string lexicograficamente maior de todas, basta inicializar vari´veis a a ← 1 e b ← 1 e, para cada v´rtice e v , se compare a, b, v, f ( ( v )) , atribuir a ← v e b ← f ( v ) , de modo que resta apenas imprimir o caminho de a at´ e b .
+
+A quest˜o ´ e, como implementar a compare int a, int b, int c, int d ( ) ? Farei isso em O (log( n )) com busca bin´ria e hash. Basta eu descobrir o maior inteiro n˜o negativo a a k tal que os primeiros k caracteres do caminho de a at´ e b coincidem com os do caminho de c at´ e d , de modo que resta comparar os ( k +1) -´ esimos caracteres dos caminhos (e considerar os casos em que algum caminho tem tamanho exatamente k ). Fa¸a c uma busca bin´ria em a k , de modo que basta implementar uma fun¸ c˜o a bool compare \_ equal int a, int b, int ( c, int d , int , k ) que retorna se os primeiros k caracteres dos caminhos s˜o iguais. Por fim, implementamos a essa fun¸ c˜o a com hash polinomial. Para isso, gere um resto aleat´rio o p m´ odulo 998244353 e, para cada v´ ertice v , se os caracteres no caminho de 1 a v s˜o a c 1 , c 2 , . . . , c k , calcule o valor de g v ( ) := ∑ k -1 i =0 c i +1 p i . Finalmente, para testar se dois caminhos de x at´ e y e de z at´ e w resultam na mesma string, veja se ocorre a seguinte igualdade:
+
+<!-- formula-not-decoded -->
+
+onde dep v ( ) denota a profundidade do v´rtice e v e q denota o inverso multiplicativo de p m´ odulo 998244353 . Isso conclui todos os passos da solu¸˜o. ca
+
+Observa¸ c˜o. Para que fique mais garantido de passar, o ideal ´ usar hash duplo, ou at´ mesmo triplo, que a e e
+
+consiste em escolher trˆs pares diferentes de resto e m´dulo, e testar a igualdade acima nos trˆs. e o e
+
+## Problem I. Desafio para o ChatGPT
+
+Como ´ e um problema de MST, podemos pensar em usar um algoritmo de MST, porque n˜o? a
+
+Os mais comuns s˜o Prim e Kruskal, por´m, se gerarmos todas as a e O n ( 2 ) arestas j´ estaremos excedendo a o tempo limite. Portanto, usaremos do Algoritmo de Boruvka. Ele consiste em:
+
+Enquanto houver mais de uma componente conexa fa¸ ca:
+
+- -Para toda componente conexa C i ache a aresta de menor custo w que liga a outra componente C j . -Ordene todas as arestas candidatas, e insira uma a uma, se isso n˜o introduzir um ciclo, de forma similar a ao algoritmo de Kruskal.
+
+´ poss´ ıvel notar que em cada etapa o n´mero de componentes conexas divide em 2, pois o pior caso seriam E u termos arestas formando uma esp´ ecie de matching (agrupar em duplas).
+
+Resta resolver o problema: como achar para cada componente a menor aresta que sai da componente. Uma op¸ c˜o que n˜o entrarei em detalhes ´ com Centroid Decomposition, o que fica a a e O n ( log 2 n ) e dificilmente ir´ passar, infelizmente. a
+
+A outra solu¸ c˜o ´ com uma t´cnica de Re-root. Para cada v´rtice, basta manter os v´rtices de a e e e e 2 cores (componentes) mais pr´ximos. Assim, se um deles for a sua cor, o mais perto seria o outro. Esse ´ um o e problema cl´ssico de re-root e pode ser feito em a O n ( ) para complexidade final de O n ( log n ) . Para mais detalhes dessa t´cnica veja: e
+
+- · Blog voltado mais a implementa¸ c˜o: a https://codeforces.com/blog/entry/124286
+- · V´ ıdeo em inglˆs e https://codeforces.com/blog/entry/96651
+
+Os cr´ditos dessa quest˜o v˜o ao Atcoder - CODE FESTIVAL 2017 Final (Parallel) - problema J - Tree e a a MST.
